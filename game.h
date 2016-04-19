@@ -37,22 +37,6 @@ typedef std::pair<int, int> Coord;
 class Board {
 public:
 	Board() {
-		//char **array = new char*[number];
-		for (int i=0; i<3; i++){
-			for (int j=0; j<3;j++) {
-				tttarray[i][j] = '-';
-			}
-		}
-		for (int c=0; c<10;c++) {
-			for (int l=0; l<10;l++) {
-				bsarray1[c][l] = '-';
-				bsarray2[c][l] = '-';
-			}
-		}
-	}
-	char tttarray[3][3];
-	char bsarray1[10][10];
-	char bsarray2[10][10];
 }; //end Board
 
 class Game {
