@@ -56,7 +56,8 @@ public:
 			int is_hit = check_coord(d, 1);
 			if (is_hit > 0) {
 				cout << "Hit!" << endl;
-				hit(fleet2[is_hit].has_coord(d));
+				int st = fleet2[is_hit].has_coord(d);
+				fleet2[is_hit].hit(st);
 			}
 			if (check_win()) {
 				return RESULT_PLAYER1_WINS;
@@ -70,7 +71,8 @@ public:
 			int is_hit = check_coord(d, 0);
 			if (is_hit > 0) {
 				cout << "Hit!" << endl;
-				hit(fleet1[is_hit].has_coord(d));
+				int st = fleet1[is_hit].has_coord(d);
+                                fleet1[is_hit].hit(st);
 			}
                         if (check_win()) {
                                 return RESULT_PLAYER2_WINS;

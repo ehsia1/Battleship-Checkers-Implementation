@@ -5,7 +5,7 @@
 #include "game.h"
 using namespace std;
 
-class Ship: public Piece {
+class Ship { //public Piece {
 public:
 	Ship(int num, Coord c, char direction) {
 
@@ -58,6 +58,17 @@ public:
 		}
 		return -1;
 
+	}
+
+	void hit(int h){
+		typedef map<Coord, int>::iterator iterator;
+		int counter = 0;
+		for (iterator it = location.begin(); it != location.end(); it++){
+			if(counter == h){
+				location[it->first]++;
+			}
+			counter++;
+		}
 	}
 private:
 	map<Coord, int> location;
