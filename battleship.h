@@ -6,139 +6,121 @@
 #include <string>
 #include <cstdlib>
 #include <cassert>
+#include <vector>
 #include <array>
+#include <map>
+#include "ships.h"
 
 using namespace std;
 //typedef array<Coord, int> ship;
+
 class BattleshipGame: public Game {
 public:
-	BattleshipGame(array<Coord, 5> p1ship, array<Coord, 5> p2ship): Game(), board() {
-		if (check_size(p1ship, p2ship) && check_same(p1ship, p2ship) && check_bounds(p1ship, p2ship)) {
-			for (int i=0; i<10; i++){
-				for (int j=0; j<10; j++){
-					for (int k=0; k<5; k++){
-						if(i==p1ship[k].first && j==p1ship[k].second){
-							board.bsarray1[i][j] = 'S';
-						}
-						if(i==p2ship[k].first && j==p2ship[k].second){
-							board.bsarray2[i][j] = 'S';
-						}
-					}
+//	BattleshipGame(): board1(), board2(), fleet1(), fleet2() {}
+	BattleshipGame(): fleet1(), fleet2() {}
+	int check_coord(Coord c, int whoseShips) {
+		if (whoseShips == 0) {
+			int counter = 0;
+			typedef vector<Ship>:: iterator iterator;
+			for (iterator it=fleet1.begin(); it!=fleet1.end(); it++) {
+				int index = (*it).has_coord(c);
+				if (index >= 0){
+					return counter;
 				}
+				counter++;
 			}
+			return counter;
+
 		}
-	}
-	bool check_size(array<Coord, 5> p1ship, array<Coord, 5> p2ship) {
-		int size1 = sizeof(p1ship)/8;
-                int size2 = sizeof(p2ship)/8;
-                if (size1 != 5 || size2 != 5) {
-                        cout << "Not the right number of ships present." << endl;
-			return false;
-                }
-		return true;
-	}
-
-	bool check_same(array<Coord, 5> p1ship, array<Coord, 5> p2ship) {
-		for (int i = 0; i < 5; i++) {
-                        for (int j = i+1; j < 5; j++) {
-                                if (p1ship[i] == p1ship[j] || p2ship[i] == p2ship[j]) {
-                                        cout << "Invalid: at least two ships on same spot." << endl;
-                                        return false;
+		if (whoseShips == 1) {
+                        int counter = 0;
+                        typedef vector<Ship>:: iterator iterator;
+                        for (iterator it=fleet2.begin(); it!=fleet2.end(); it++) {
+                                int index = (*it).has_coord(c);
+                                if (index >= 0){
+                                        return counter;
                                 }
+                                counter++;
                         }
-                }
-		return true;
-	}
+                        return counter;
 
-	bool check_bounds(array<Coord, 5> p1ship, array<Coord, 5> p2ship) {
-		int count = 0;
-                for (int i = 0; i < 10; i++) {
-                        for (int j = 0; j < 5; j++) {
-                                if (p1ship[j].first == i) {
-                                        count++;
-                                }
-                                if (p1ship[j].second == i) {
-                                        count++;
-                                }
-                                if (p2ship[j].first == i) {
-                                        count++;
-                                }
-                                if (p2ship[j].second == i) {
-                                        count++;
-                                }
-                        }
                 }
-                if (count != 20) {
-                        cout << "At least one ship out of bounds." << endl;
-                        return false;
-                }
-		return true;
+
 	}
 
 	GameResult attack_square(Coord d) {
-		if (turn==false) {
-			if (board.bsarray2[d.first][d.second] == '-') {
-				board.bsarray2[d.first][d.second] = 'O';
-				if (check_win()) {
-					return RESULT_PLAYER1_WINS;
-				}
-				toggle();
-				return RESULT_KEEP_PLAYING;
-			} else if (board.bsarray2[d.first][d.second] == 'S') {
-				board.bsarray2[d.first][d.second] = 'X';
-				if (check_win()) {
-                                        return RESULT_PLAYER1_WINS;
-                                }
-				toggle();
-				return RESULT_KEEP_PLAYING;
-			} else if (board.bsarray2[d.first][d.second] == 'X' || board.bsarray2[d.first][d.second] == 'O') {
-				return RESULT_INVALID;
-			}
-		} else {
-			if (board.bsarray1[d.first][d.second] == '-') {
-                                board.bsarray1[d.first][d.second] = 'O';
-                                if (check_win()) {
-                                        return RESULT_PLAYER2_WINS;
-                                }
-                                toggle();
-                                return RESULT_KEEP_PLAYING;
-                        } else if (board.bsarray1[d.first][d.second] == 'S') {
-                                board.bsarray1[d.first][d.second] = 'X';
-                                if (check_win()) {
-                                        return RESULT_PLAYER2_WINS;
-                                }
-                                toggle();
-                                return RESULT_KEEP_PLAYING;
-                        } else if (board.bsarray1[d.first][d.second] == 'X' || board.bsarray1[d.first][d.second] == 'O') {
+		if (turn==false) { //player 1 turn
+			if (d.first < 0 || d.first > 9 || d.second < 0 || d.second > 9) {
                                 return RESULT_INVALID;
                         }
-			//return RESULT_INVALID;
+			int is_hit = check_coord(d, 1);
+			if (is_hit > 0) {
+				cout << "Hit!" << endl;
+				hit(fleet2[is_hit].has_coord(d));
+			}
+			if (check_win()) {
+				return RESULT_PLAYER1_WINS;
+			}
+			toggle();
+			return RESULT_KEEP_PLAYING;
+		} else {
+			if (d.first < 0 || d.first > 9 || d.second < 0 || d.second > 9) {
+                                return RESULT_INVALID;
+                        }
+			int is_hit = check_coord(d, 0);
+			if (is_hit > 0) {
+				cout << "Hit!" << endl;
+				hit(fleet1[is_hit].has_coord(d));
+			}
+                        if (check_win()) {
+                                return RESULT_PLAYER2_WINS;
+                        }
+                        toggle();
+                        return RESULT_KEEP_PLAYING;
 		}
-		return RESULT_INVALID;
 	}
 	bool check_win() {
+		typedef vector<Ship>::iterator iterator;
+		int counter = 0;
 		if (turn == false) {
-			for (int i=0; i<10; i++){
-                        	for (int j=0; j<10; j++){
-					if (board.bsarray2[i][j]=='S') {
-						return false;
-					}
+			for (iterator it = fleet2.begin(); it != fleet2.end(); it++ ) {
+				if (it->is_sunk() == 1) {
+					counter++;
 				}
 			}
+			if (counter == 5) {
+				return true;
+			}
 		} else {
-                        for (int i=0; i<10; i++){
-                                for (int j=0; j<10; j++){
-                                        if (board.bsarray1[i][j]=='S') {
-                                                return false;
-                                        }
+			for (iterator it = fleet1.begin(); it != fleet1.end(); it++ ) {
+                                if (it->is_sunk() == 1) {
+                                        counter++;
                                 }
                         }
+                        if (counter == 5) {
+                                return true;
+                        }
                 }
-		return true;
+		return false;
 	}
 
 private:
-	Board board;
+//	BattleshipBoard board1;
+//	BattleshipBoard board2;
+	vector<Ship> fleet1;
+	vector<Ship> fleet2;
+};
+
+class  BattleshipBoard: public Board {
+	BattleshipBoard() {
+		for (int i=0;i<10;i++) {
+			for (int l=0;l<10;l++) {
+				bsarray[i][l] = '-';
+			}
+		}
+	}
+private:
+	char bsarray[10][10];
 };
 
 #endif
