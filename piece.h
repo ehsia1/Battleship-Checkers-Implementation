@@ -26,8 +26,8 @@ public:
 		h = h;
 	}
 
-	virtual bool is_sunk() {
-		return true;
+	virtual int is_sunk() {
+		return 1;
 	}
 
 };
