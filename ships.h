@@ -3,9 +3,10 @@
 #include <iostream>
 #include <map>
 #include "game.h"
+#include "piece.h"
 using namespace std;
 
-class Ship { //public Piece {
+class Ship: public Piece {
 public:
 	Ship(int num, Coord c, char direction) {
 
