@@ -14,6 +14,7 @@ public:
 			cout << "Off the board!" << endl;
 		} else if (direction == 'h') {
 			if (num+c.second < 10) {
+				lgbtq = direction;
 				for (int i=0;i<num;i++) {
 					Coord temp = make_pair(c.first, c.second+i);
 					location[temp] = 0;
@@ -23,6 +24,7 @@ public:
 			}
 		} else if (direction == 'v') {
 			if (num+c.first < 10) {
+				lgbtq = direction;
 				for (int i=0;i<num;i++) {
 					Coord temp = make_pair(c.first+i, c.second);
 					location[temp] = 0;
@@ -71,9 +73,23 @@ public:
 			counter++;
 		}
 	}
+
+	char get_dir(){
+		return lgbtq;
+	}
+
+	void set_name(String s){
+		name = s;
+	}
+
+	String get_name(){
+		return name;
+	}
+
 private:
 	map<Coord, int> location;
 	string name;
+	char lgbtq;
 };
 
 #endif
