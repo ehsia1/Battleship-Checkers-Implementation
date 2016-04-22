@@ -29,7 +29,7 @@ public:
 				}
 				counter++;
 			}
-			return counter;
+			return -1;
 
 		}
 		if (whoseShips == 1) {
@@ -42,7 +42,7 @@ public:
                                 }
                                 counter++;
                         }
-                        return counter;
+                        return -1;
 
                 }
 
@@ -54,7 +54,7 @@ public:
                                 return RESULT_INVALID;
                         }
 			int is_hit = check_coord(d, 1);
-			if (is_hit > 0) {
+			if (is_hit >= 0) {
 				cout << "Hit!" << endl;
 				int st = fleet2[is_hit].has_coord(d);
 				fleet2[is_hit].hit(st);
@@ -69,7 +69,7 @@ public:
                                 return RESULT_INVALID;
                         }
 			int is_hit = check_coord(d, 0);
-			if (is_hit > 0) {
+			if (is_hit >= 0) {
 				cout << "Hit!" << endl;
 				int st = fleet1[is_hit].has_coord(d);
                                 fleet1[is_hit].hit(st);
@@ -106,9 +106,6 @@ public:
 		return false;
 	}
 
-private:
-//	BattleshipBoard board1;
-//	BattleshipBoard board2;
 	vector<Ship> fleet1;
 	vector<Ship> fleet2;
 };
