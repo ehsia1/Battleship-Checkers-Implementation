@@ -10,6 +10,7 @@ class Ship: public Piece {
 public:
 	Ship(int num, Coord c, char direction) {
 
+		direction = toupper(direction);
 		if ((c.first > 9) || (c.first<0) || (c.second > 9) || (c.second<0)) {
 			cout << "Off the board!" << endl;
 		} else if (direction == 'h') {
