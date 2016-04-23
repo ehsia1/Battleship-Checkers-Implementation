@@ -155,7 +155,7 @@ public:
 	}
 
 	void sink(){
-		typedef map<Coord, int>:: iterator iterator;
+		typedef map<Coord, int>::iterator iterator;
 		for (iterator it = location.begin(); it != location.end(); it++){
 			Coord temp = it->first;
                         temp.first = -1;
@@ -165,9 +165,11 @@ public:
 		}
 	}
 
+
 	map<Coord, int> location;
 
 private:
+//	map<Coord,int> location;
 	string name;
 	char lgbtq; //orientation of ship on board (vertical (V) or horizontal (H)
 	int length;

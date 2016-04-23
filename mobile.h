@@ -15,6 +15,7 @@ final project*/
 #include <vector>
 #include <array>
 #include <map>
+#include <cctype>
 #include "ships.h"
 #include "battleship.h"
 using namespace std;
@@ -27,7 +28,7 @@ public:
 		if (num>3 || num<-3){
 			return false;
 		}
-		dir = tuupper(dir);
+		dir = toupper(dir);
 
 		if (turn==false){
 			int str = check_coord(c,0);
@@ -36,22 +37,22 @@ public:
 			}
 			for (int i=1; i<=num; i++){
 				if (dir == 'U'){
-					if (check_coord(make_pair(fleet1[str].location.rend()->first.first, fleet1[str].location.rend()->first.second+i){
+					if (check_coord(make_pair(fleet1[str].location.rend()->first.first, fleet1[str].location.rend()->first.second+i),0)){
 						return false;
 					}
 				}
 				else if (dir == 'D'){
-					if (check_coord(make_pair(fleet1[str].location.begin()->first.first, fleet1[str].location.begin()->first.second-i){
+					if (check_coord(make_pair(fleet1[str].location.begin()->first.first, fleet1[str].location.begin()->first.second-i),0)){
 						return false;
 					}
 				}
 				else if (dir == 'R'){
-					if (check_coord(make_pair(fleet1[str].location.rend()->first.first+i, fleet1[str].location.rend()->first.second){
+					if (check_coord(make_pair(fleet1[str].location.rend()->first.first+i, fleet1[str].location.rend()->first.second),0)){
 						return false;
 					}
 				}
 				else if (dir == 'L'){
-					if (check_coord(make_pair(fleet1[str].location.begin()->first.first-i, fleet1[str].location.begin()->first.second){
+					if (check_coord(make_pair(fleet1[str].location.begin()->first.first-i, fleet1[str].location.begin()->first.second),0)){
 						return false;
 					}
 				}
@@ -68,22 +69,22 @@ public:
 			}
 			for (int i=1; i<=num; i++){
                                 if (dir == 'U'){
-                                        if (check_coord(make_pair(fleet2[str].location.rend()->first.first, fleet2[str].location.rend()->first.second+i){
+                                        if (check_coord(make_pair(fleet2[str].location.rend()->first.first, fleet2[str].location.rend()->first.second+i),1)){
                                                 return false;
                                         }
                                 }
                                 else if (dir == 'D'){
-                                        if (check_coord(make_pair(fleet2[str].location.begin()->first.first, fleet2[str].location.begin()->first.second-i){
+                                        if (check_coord(make_pair(fleet2[str].location.begin()->first.first, fleet2[str].location.begin()->first.second-i),1)){
                                                 return false;
                                         }
                                 }
                                 else if (dir == 'R'){
-                                        if (check_coord(make_pair(fleet2[str].location.rend()->first.first+i, fleet2[str].location.rend()->first.second){
+                                        if (check_coord(make_pair(fleet2[str].location.rend()->first.first+i, fleet2[str].location.rend()->first.second),1)){
                                                 return false;
                                         }
                                 }
                                 else if (dir == 'L'){
-                                        if (check_coord(make_pair(fleet2[str].location.begin()->first.first-i, fleet2[str].location.begin()->first.second){
+                                        if (check_coord(make_pair(fleet2[str].location.begin()->first.first-i, fleet2[str].location.begin()->first.second),1)){
                                                 return false;
                                         }
                                 }
