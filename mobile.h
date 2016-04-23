@@ -45,5 +45,7 @@ public:
 			}
 			return false;
 		}
+	}
+}
 
 
