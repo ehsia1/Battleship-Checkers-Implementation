@@ -36,7 +36,7 @@ typedef std::pair<int, int> Coord;
 
 class Board {
 public:
-	Board() {
+	Board() {}
 }; //end Board
 
 class Game {

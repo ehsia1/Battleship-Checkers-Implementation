@@ -4,7 +4,7 @@
 #include <map>
 #include "game.h"
 #include "piece.h"
-//using namespace std;
+using namespace std;
 
 class Ship: public Piece {
 public:
