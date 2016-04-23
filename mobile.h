@@ -40,6 +40,10 @@ public:
 			if (str<0){
 				return false;
 			}
-			
+			if (fleet2[str].shift(num, dir)){
+				return true;
+			}
+			return false;
+		}
 
 
