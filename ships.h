@@ -76,6 +76,59 @@ public:
 		}
 	}
 
+	bool shift(int num, char dir){
+		typedef map<Coord, int>::iterator iterator;
+		typedef map<Coord, int>::reverse_iterator r_iterator;
+		if (dir=='R'){
+			if (lgbtq == 'V'){
+				return false;
+			}
+			if (location.rbegin()->first.second + num >9){
+				return false;
+			}
+			for (r_iterator rit = location.rbegin(); rit!= location.rend(); rit++){
+				rit->first.second += num;
+			}
+			return true;
+		}
+		if (dir=='L'){
+			if (lgbtq == 'V'){
+				return false;
+			}
+			if (location.begin()->first.second - num <0){
+				return false;
+			}
+			for (iterator it = location.begin(); it!= location.end(); it++){
+				it->first.second -= num;
+			}
+			return true;
+		}
+		if (dir=='U'){
+			if (lgbtq == 'H'){
+				return false;
+			}
+			if (location.rbegin()->first.first + num >9){
+				return false;
+			}
+			for (r_iterator rit = location.rbegin(); rit!=location.rend(); rit++){
+				rit->first.first += num;
+			}
+			return true;
+		}
+		if (dir=='D'){
+			if (lgbtq == 'H'){
+				return false;
+			}
+			if (location.begin()->first.first - num <0){
+				return false;
+			}
+			for (iterator it = location.begin(); it!=location.end(); it++){
+				it->first.first -= num;
+			}
+			return true;
+		}
+	}
+
 	char get_dir(){
 		return lgbtq;
 	}
@@ -91,7 +144,7 @@ public:
 private:
 	map<Coord, int> location;
 	string name;
-	char lgbtq;
+	char lgbtq; //orientation of ship on board (vertical (V) or horizontal (H)
 	int length;
 };
 
