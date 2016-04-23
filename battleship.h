@@ -91,7 +91,7 @@ public:
                                 if (fleet1[is_hit].is_sunk()) {
                                         cout << "SUNK" << fleet1[is_hit].get_name() << endl;
                                         toggle();
-					fleet1.[is_hit].sink();
+					fleet1[is_hit].sink();
                                         return RESULT_KEEP_PLAYING;
 
                                 }

@@ -17,10 +17,12 @@ final project*/
 #include <map>
 #include "ships.h"
 #include "battleship.h"
+using namespace std;
 
 class Mobile: public BattleshipGame {
 public:
 	Mobile(): BattleshipGame() {}
+
 	bool move(Coord c, int num, char dir){
 		if (num>3 || num<-3){
 			return false;
