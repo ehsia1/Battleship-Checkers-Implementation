@@ -7,7 +7,9 @@ void placement(BattleshipGame bsgame) {
 	string dif_ships[] = {"AICRAFT CARRIER", "BATTLESHIP", "CRUISER", "SUBMARINE", "DESTROYER"};
 	int lengths[] = {5, 4, 3, 3, 2};
 
+	Coord bs = make_pair(1, 1);
 	string userInput;
+	Ship temp2(5, bs, 'V');
 	for (int i=0; i<5;i++) {
 		bool okay = true;
 		while (okay) {
@@ -19,9 +21,8 @@ void placement(BattleshipGame bsgame) {
 			char direction = toupper(userInput.at(2));
 			Coord tempCoord = make_pair(first, second);
 			Ship temp(lengths[i], tempCoord, direction); 
-
+			temp2 = temp;
 			for (vector<Ship>::iterator it = bsgame.fleet1.begin() ; it != bsgame.fleet1.end(); it++) {
-				int counter =0;
 				for (int j=0; j<lengths[i]; j++){
 					if (direction == 'H'){
 						tempCoord.second++;
@@ -34,7 +35,7 @@ void placement(BattleshipGame bsgame) {
 
 			}
 		}
-		bsgame.fleet1[i] = temp;
+		bsgame.fleet1[i] = temp2;
 	}
 
 	for (int i=0; i<5;i++) {
@@ -50,7 +51,6 @@ void placement(BattleshipGame bsgame) {
                         Ship temp(lengths[i], tempCoord, direction); 
 
                         for (vector<Ship>::iterator it = bsgame.fleet2.begin() ; it != bsgame.fleet2.end(); it++) {
-                                int counter =0;
                                 for (int j=0; j<lengths[i]; j++){
                                         if (direction == 'H'){
                                                 tempCoord.second++;
@@ -63,7 +63,7 @@ void placement(BattleshipGame bsgame) {
 
                         }
                 }
-                bsgame.fleet2[i] = temp;
+                bsgame.fleet2[i] = temp2;
         }
 }
 
@@ -74,10 +74,12 @@ int main() {
 	//cin >> choice;
 
 	while (choice != 'q' && choice != 'Q' && choice != '1' && choice != '2' && choice != '3') {
-		cout << "CHOOSE A GAME:"
+		cout << "CHOOSE A GAME:";
 		cin >> choice;
 		cout << endl;
 	}
+
+	int count1=0;
 
 	switch(choice) {
 		case 'q':
@@ -85,17 +87,17 @@ int main() {
 			return 1;
 			break;
 		case '1':
+		{
 			BattleshipGame bsgame;
 			placement(bsgame);
 			string input;
-			int count1=0;
 			while (count1==0) {
-				if (turn == false) {
+				if (bsgame.turn == false) {
 					cout << "PLAYER 1:";
 					cin >> input;
 					cout << endl;
 					if (input.at(0) == 'q' || input.at(0) == 'Q') {
-						exit();
+						exit(1);
 					}
 					int first = input.at(0) - '0';
 					int second = input.at(1) - '0';
@@ -108,7 +110,7 @@ int main() {
                                         cin >> input;
                                         cout << endl;
 					if (input.at(0) == 'q' || input.at(0) == 'Q') {
-                                                exit();
+                                                exit(1);
                                         }
                                         int first = input.at(0) - '0';
                                         int second = input.at(1) - '0';
@@ -119,13 +121,13 @@ int main() {
 				}
 			}
 			break;
+		}
 		case '2':
 			//
 			break;
 		case '3':
 			//
 			break;
-		default:
 	}
 return 0;
 }

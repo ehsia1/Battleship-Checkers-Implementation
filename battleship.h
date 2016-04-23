@@ -45,7 +45,7 @@ public:
                         return -1;
 
                 }
-
+		return -1;
 	}
 
 	GameResult attack_square(Coord d) {
@@ -60,7 +60,7 @@ public:
                                 cout << "PLAYER 1 WON" << endl;
                                 return RESULT_PLAYER1_WINS;
                         	}
-				if (fleet2[is_hit].is_sunk) {
+				if (fleet2[is_hit].is_sunk()) {
 					cout << "SUNK" << fleet2[is_hit].get_name() << endl;
 					toggle();
 					return RESULT_KEEP_PLAYING;
@@ -87,7 +87,7 @@ public:
                                 cout << "PLAYER 2 WON" << endl;
                                 return RESULT_PLAYER2_WINS;
                                 }
-                                if (fleet1[is_hit].is_sunk) {
+                                if (fleet1[is_hit].is_sunk()) {
                                         cout << "SUNK" << fleet1[is_hit].get_name() << endl;
                                         toggle();
                                         return RESULT_KEEP_PLAYING;

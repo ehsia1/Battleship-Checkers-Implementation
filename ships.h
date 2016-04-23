@@ -87,7 +87,10 @@ public:
 				return false;
 			}
 			for (r_iterator rit = location.rbegin(); rit!= location.rend(); rit++){
-				rit->first.second += num;
+				Coord temp = rit->first;
+				temp.second += num;
+				location[temp] = rit->second;
+				location.erase(rit->first);
 			}
 			return true;
 		}
@@ -99,7 +102,10 @@ public:
 				return false;
 			}
 			for (iterator it = location.begin(); it!= location.end(); it++){
-				it->first.second -= num;
+				Coord temp = it->first;
+				temp.second -= num;
+				location[temp] = it->second;
+				location.erase(it->first);
 			}
 			return true;
 		}
@@ -111,7 +117,10 @@ public:
 				return false;
 			}
 			for (r_iterator rit = location.rbegin(); rit!=location.rend(); rit++){
-				rit->first.first += num;
+				Coord temp = rit->first;
+				temp.first += num;
+				location[temp] = rit->second;
+				location.erase(rit->first);
 			}
 			return true;
 		}
@@ -123,21 +132,25 @@ public:
 				return false;
 			}
 			for (iterator it = location.begin(); it!=location.end(); it++){
-				it->first.first -= num;
+				Coord temp = it->first;
+				temp.first -= num;
+				location[temp] = it->second;
+				location.erase(it->first);
 			}
 			return true;
 		}
+		return false;
 	}
 
 	char get_dir(){
 		return lgbtq;
 	}
 
-	void set_name(String s){
+	void set_name(string s){
 		name = s;
 	}
 
-	String get_name(){
+	string get_name(){
 		return name;
 	}
 

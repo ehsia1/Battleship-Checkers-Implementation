@@ -4,8 +4,8 @@ Rohan Tilva
 Evan Hsia
 final project*/
 
-#ifndef BATTLESHIP_H
-#define BATTLESHIP_H
+#ifndef MOBILE_H
+#define MOBILE_H
 
 #include "game.h"
 #include <iostream>
@@ -45,7 +45,9 @@ public:
 			}
 			return false;
 		}
+		return false;
 	}
-}
+};
 
+#endif
 
