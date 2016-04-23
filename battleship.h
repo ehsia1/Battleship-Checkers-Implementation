@@ -17,7 +17,7 @@ using namespace std;
 class BattleshipGame: public Game {
 public:
 //	BattleshipGame(): board1(), board2(), fleet1(), fleet2() {}
-	BattleshipGame(): fleet1(), fleet2() {}
+	BattleshipGame(): Game(), fleet1(), fleet2() {}
 	int check_coord(Coord c, int whoseShips) {
 		if (whoseShips == 0) {
 			int counter = 0;
