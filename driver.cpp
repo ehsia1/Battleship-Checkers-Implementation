@@ -1,6 +1,6 @@
 #include <utility>
 #include "battleship.h"
-
+#include "mobile.h"
 using namespace std;
 
 void placement(BattleshipGame bsgame) {
@@ -16,26 +16,41 @@ void placement(BattleshipGame bsgame) {
 			cout << "PLAYER 1 PLACE " << dif_ships[i] << ":";
 			cin >> userInput;
 			cout << endl;
+			if (userInput.at(0) == 'q' || userInput.at(0) == 'Q'){
+				exit(1);
+			}
+			bool share = true;
 			int first = userInput.at(0) - '0';
 			int second = userInput.at(1) - '0';
 			char direction = toupper(userInput.at(2));
 			Coord tempCoord = make_pair(first, second);
-			Ship temp(lengths[i], tempCoord, direction); 
-			temp2 = temp;
-			for (vector<Ship>::iterator it = bsgame.fleet1.begin() ; it != bsgame.fleet1.end(); it++) {
-				for (int j=0; j<lengths[i]; j++){
-					if (direction == 'H'){
-						tempCoord.second++;
-					}else if (direction == 'V'){
-						tempCoord.first++;
-					}
-					if (!(*it).has_coord(tempCoord))
-						okay = false;
-					}
+			Ship temp(lengths[i], tempCoord, direction);
+			if (temp.location.empty()==false){
+				temp2 = temp;
+				if (bsgame.fleet1.empty() == false) {
+					for (vector<Ship>::iterator it = bsgame.fleet1.begin() ; it != bsgame.fleet1.end(); it++) {
+						for (int j=0; j<lengths[i]; j++){
+							if (it->has_coord(tempCoord) == -1) {
+								okay = false;
+							}else if (share){
+								i--;
+								share = false;
+							}
+							if (direction == 'H'){
+								tempCoord.second++;
+							}else if (direction == 'V'){
+								tempCoord.first++;
+							}
+						}
 
+					}
+				}
+				else{
+					okay = false;
+				}
 			}
 		}
-		bsgame.fleet1[i] = temp2;
+		bsgame.fleet1.push_back(temp2);
 	}
 
 	for (int i=0; i<5;i++) {
@@ -44,26 +59,40 @@ void placement(BattleshipGame bsgame) {
                         cout << "PLAYER 2 PLACE " << dif_ships[i] << ":";
                         cin >> userInput;
                         cout << endl;
+			if (userInput.at(0) == 'Q' || userInput.at(0) == 'q') {
+				exit(1);
+			}
+			bool share = true;
                         int first = userInput.at(0) - '0';
                         int second = userInput.at(1) - '0';
                         char direction = toupper(userInput.at(2));
                         Coord tempCoord = make_pair(first, second);
-                        Ship temp(lengths[i], tempCoord, direction); 
+                        Ship temp(lengths[i], tempCoord, direction);
+			if(temp.location.empty() == false){
+				temp2=temp;
+				if (bsgame.fleet2.empty() == false) {
+		                        for (vector<Ship>::iterator it = bsgame.fleet2.begin() ; it != bsgame.fleet2.end(); it++) {
+        		                        for (int j=0; j<lengths[i]; j++){
+							if (it->has_coord(tempCoord) == -1) {
+                                                                okay = false;
+                                                        }else if (share){
+								i--;
+								share = false;
+							}
+        	        	                        if (direction == 'H'){
+        	                	                        tempCoord.second++;
+        	                        	        }else if (direction == 'V'){
+        	                                	        tempCoord.first++;
+        	                              		}
+						}
+ 		                       	}
+        		        } else {
+					okay = false;
+				}
+			}
+		}
+		bsgame.fleet2.push_back(temp2);
 
-                        for (vector<Ship>::iterator it = bsgame.fleet2.begin() ; it != bsgame.fleet2.end(); it++) {
-                                for (int j=0; j<lengths[i]; j++){
-                                        if (direction == 'H'){
-                                                tempCoord.second++;
-                                        }else if (direction == 'V'){
-                                                tempCoord.first++;
-                                        }
-                                        if (!(*it).has_coord(tempCoord))
-                                                okay = false;
-                                        }
-
-                        }
-                }
-                bsgame.fleet2[i] = temp2;
         }
 }
 
@@ -123,8 +152,59 @@ int main() {
 			break;
 		}
 		case '2':
-			//
+			{
+			Mobile mobilegame;
+                        placement(mobilegame);
+                        string input;
+			while (count1==0) {
+				if (mobilegame.turn == false) {
+					cout << "PLAYER 1:";
+					cin >> input;
+					if (input.at(0) == 'q' || input.at(0) == 'Q') {
+                                                        exit(1);
+                                        }
+					int inputLength = input.length();
+					if (inputLength == 2) {
+						int first = input.at(0) - '0';
+                                        	int second = input.at(1) - '0';
+                                        	Coord d = make_pair(first, second);
+                                        	if (mobilegame.attack_square(d) == RESULT_PLAYER1_WINS) {
+                                                	count1++;
+                                        	}
+					} else if (inputLength == 4) {
+						int first = input.at(0) - '0';
+						int second = input.at(1) - '0';
+						char third = input.at(2);
+						int fourth = input.at(3) - '0';
+						Coord c = make_pair(first, second);
+						mobilegame.move(c, fourth, third);
+					}
+				} else {
+					cout << "PLAYER 2:";
+                                        cin >> input;
+                                        if (input.at(0) == 'q' || input.at(0) == 'Q') {
+                                                        exit(1);
+                                        }
+                                        int inputLength = input.length();
+                                        if (inputLength == 2) {
+                                                int first = input.at(0) - '0';
+                                                int second = input.at(1) - '0';
+                                                Coord d = make_pair(first, second);
+                                                if (mobilegame.attack_square(d) == RESULT_PLAYER2_WINS) {
+                                                        count1++;
+                                                }
+                                        } else if (inputLength == 4) {
+                                                int first = input.at(0) - '0';
+                                                int second = input.at(1) - '0';
+                                                char third = input.at(2);
+                                                int fourth = input.at(3) - '0';
+                                                Coord c = make_pair(first, second);
+                                                mobilegame.move(c, fourth, third);
+                                        }
+				}
+			}
 			break;
+		}
 		case '3':
 			//
 			break;
