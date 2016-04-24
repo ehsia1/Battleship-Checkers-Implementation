@@ -37,9 +37,11 @@ void placement(BattleshipGame bsgame) {
 				if (bsgame.fleet1.empty() == false) {
 					for (vector<Ship>::iterator it = bsgame.fleet1.begin() ; it != bsgame.fleet1.end(); it++) {
 						int index = lengths[i];
+						tempCoord.first = first;
+						tempCoord.second = second;
 						for (int j=0; j<index; j++){
 							if (it->has_coord(tempCoord) > -1) {
-								cout << "bad placement"<<endl;
+								//cout << "bad placement"<<endl;
 								share = false;
 							}
 							if (direction == 'H'){
@@ -63,11 +65,11 @@ void placement(BattleshipGame bsgame) {
 			}
 		}
 		if(share){
-			cout<<"added"<<endl;
+			//cout<<"added"<<endl;
 			temp2.set_name(dif_ships[i]);
 			bsgame.fleet1.push_back(temp2);
 		}
-		print(bsgame.fleet1);
+		//print(bsgame.fleet1);
 	}
 
 	for (int i=0; i<5;i++) {
@@ -79,7 +81,7 @@ void placement(BattleshipGame bsgame) {
 			if (userInput.at(0) == 'Q' || userInput.at(0) == 'q') {
 				exit(1);
 			}
-			bool share = true;
+			share = true;
                         int first = userInput.at(0) - '0';
                         int second = userInput.at(1) - '0';
                         char direction = toupper(userInput.at(2));
@@ -89,13 +91,13 @@ void placement(BattleshipGame bsgame) {
 				temp2=temp;
 				if (bsgame.fleet2.empty() == false) {
 		                        for (vector<Ship>::iterator it = bsgame.fleet2.begin() ; it != bsgame.fleet2.end(); it++) {
-        		                        for (int j=0; j<lengths[i]; j++){
-							if (it->has_coord(tempCoord) == -1) {
-                                                                okay = false;
-                                                        }else if (share){
-								i--;
-								share = false;
-							}
+						int index = lengths[i];
+						tempCoord.first = first;
+						tempCoord.second = second;
+        		                        for (int j=0; j<index; j++){
+							if (it->has_coord(tempCoord) > -1) {
+                                                                share = false;
+                                                        }
         	        	                        if (direction == 'H'){
         	                	                        tempCoord.second++;
         	                        	        }else if (direction == 'V'){
@@ -103,6 +105,9 @@ void placement(BattleshipGame bsgame) {
         	                              		}
 						}
  		                       	}
+					if (share){
+						okay = false;
+					}
         		        } else {
 					okay = false;
 				}
@@ -110,7 +115,10 @@ void placement(BattleshipGame bsgame) {
 				temp2 = temp;
 			}
 		}
-		bsgame.fleet2.push_back(temp2);
+		if (share){
+			temp2.set_name(dif_ships[i]);
+			bsgame.fleet2.push_back(temp2);
+		}
 
         }
 }
