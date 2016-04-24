@@ -8,6 +8,7 @@ using namespace std;
 
 class Ship: public Piece {
 public:
+
 	Ship(int num, Coord c, char direction) {
 
 		direction = toupper(direction);
@@ -152,6 +153,14 @@ public:
 
 	string get_name(){
 		return name;
+	}
+
+	void display(){
+		cout<<name<<": ";
+		typedef map<Coord, int>::iterator iterator;
+		for (iterator it = location.begin(); it != location.end(); it++){
+			cout<<"("<< it->first.first <<", "<< it->first.second <<")"<< " hits: " << it->second << endl;
+		}
 	}
 
 	void sink(){
