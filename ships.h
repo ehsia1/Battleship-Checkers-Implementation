@@ -155,8 +155,12 @@ public:
 		return name;
 	}
 
+	int get_length(){
+		return length;
+	}
+
 	void display(){
-		cout<<name<<": ";
+		cout<<name<<": "<<endl;
 		typedef map<Coord, int>::iterator iterator;
 		for (iterator it = location.begin(); it != location.end(); it++){
 			cout<<"("<< it->first.first <<", "<< it->first.second <<")"<< " hits: " << it->second << endl;

@@ -3,6 +3,12 @@
 #include "mobile.h"
 using namespace std;
 
+void print(vector<Ship> fleet){
+	for (vector<Ship>::iterator it = fleet.begin(); it!=fleet.end(); it++){
+		it->display();
+	}
+}
+
 void placement(BattleshipGame bsgame) {
 	string dif_ships[] = {"AICRAFT CARRIER", "BATTLESHIP", "CRUISER", "SUBMARINE", "DESTROYER"};
 	int lengths[] = {5, 4, 3, 3, 2};
@@ -20,7 +26,7 @@ void placement(BattleshipGame bsgame) {
 			if (userInput.at(0) == 'q' || userInput.at(0) == 'Q'){
 				exit(1);
 			}
-			//bool share = true;
+			share = true;
 			int first = userInput.at(0) - '0';
 			int second = userInput.at(1) - '0';
 			char direction = toupper(userInput.at(2));
@@ -32,9 +38,8 @@ void placement(BattleshipGame bsgame) {
 					for (vector<Ship>::iterator it = bsgame.fleet1.begin() ; it != bsgame.fleet1.end(); it++) {
 						int index = lengths[i];
 						for (int j=0; j<index; j++){
-							if (it->has_coord(tempCoord) > -1 && share) {
-								cout << "swag";
-			//					i--;
+							if (it->has_coord(tempCoord) > -1) {
+								cout << "bad placement"<<endl;
 								share = false;
 							}
 							if (direction == 'H'){
@@ -58,9 +63,11 @@ void placement(BattleshipGame bsgame) {
 			}
 		}
 		if(share){
+			cout<<"added"<<endl;
+			temp2.set_name(dif_ships[i]);
 			bsgame.fleet1.push_back(temp2);
 		}
-		share = true;
+		print(bsgame.fleet1);
 	}
 
 	for (int i=0; i<5;i++) {
