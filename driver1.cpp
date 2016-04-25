@@ -209,6 +209,7 @@ int main() {
 			{
 			Mobile mobilegame;
                         placement(mobilegame);
+			print(mobilegame.fleet1);
                         string input;
 			while (count1==0) {
 				if (mobilegame.turn == false) {
@@ -225,6 +226,7 @@ int main() {
                                         	if (mobilegame.attack_square(d) == RESULT_PLAYER1_WINS) {
                                                 	count1++;
                                         	}
+						print(mobilegame.fleet1);
 					} else if (inputLength == 4) {
 						int first = input.at(0) - '0';
 						int second = input.at(1) - '0';
@@ -232,6 +234,8 @@ int main() {
 						int fourth = input.at(3) - '0';
 						Coord c = make_pair(first, second);
 						mobilegame.move(c, fourth, third);
+						print(mobilegame.fleet1);
+//						mobilegame.toggle();
 					}
 				} else {
 					cout << "PLAYER 2:";
@@ -254,6 +258,7 @@ int main() {
                                                 int fourth = input.at(3) - '0';
                                                 Coord c = make_pair(first, second);
                                                 mobilegame.move(c, fourth, third);
+//						mobilegame.toggle();
                                         }
 				}
 			}
