@@ -17,6 +17,8 @@ void placement(BattleshipGame& bsgame) {
 	string userInput;
 	Ship temp2(5, bs, 'V');
 	bool share = true;
+	int same_pos = 0;
+	int pos = 0;
 	for (int i=0; i<5;i++) {
 		bool okay = true;
 		while (okay) {
@@ -43,6 +45,7 @@ void placement(BattleshipGame& bsgame) {
 							if (it->has_coord(tempCoord) > -1) {
 								//cout << "bad placement"<<endl;
 								share = false;
+								same_pos++;
 							}
 							if (direction == 'H'){
 								tempCoord.second++;
@@ -50,8 +53,13 @@ void placement(BattleshipGame& bsgame) {
 								tempCoord.first++;
 							}
 						}
-
+						if (same_pos >= 1 || (same_pos == 1 && i != pos)) {
+							cout << "Already a ship there" << endl;
+						}
+						same_pos = 0;
+						pos++;
 					}
+					pos = 0;
 					if (share){
 						okay = false;
 					}
@@ -97,6 +105,7 @@ void placement(BattleshipGame& bsgame) {
         		                        for (int j=0; j<index; j++){
 							if (it->has_coord(tempCoord) > -1) {
                                                                 share = false;
+								same_pos++;
                                                         }
         	        	                        if (direction == 'H'){
         	                	                        tempCoord.second++;
@@ -104,7 +113,13 @@ void placement(BattleshipGame& bsgame) {
         	                                	        tempCoord.first++;
         	                              		}
 						}
+						if (same_pos > 1 || (same_pos == 1 && i != pos)) {
+							cout << "Already a ship there" << endl;
+						}
+						same_pos = 0;
+						pos++;
  		                       	}
+					pos = 0;
 					if (share){
 						okay = false;
 					}
@@ -248,5 +263,5 @@ int main() {
 			//
 			break;
 	}
-return 0;
+	return 0;
 }
