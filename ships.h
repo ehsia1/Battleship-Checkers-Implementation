@@ -43,7 +43,7 @@ public:
 		int counter2=0;
 		for (iterator it = location.begin(); it != location.end(); it++) {
 			counter1++;
-			if (it->second == 1) {
+			if (it->second >= 1) {
 				counter2++;
 			}
 		}

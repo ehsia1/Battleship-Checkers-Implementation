@@ -56,21 +56,24 @@ public:
                         }
 			int is_hit = check_coord(d, 1);
 			if (is_hit >= 0) {
-				if (check_win()) {
+				cout << "Hit!" << endl;
+                                int st = fleet2[is_hit].has_coord(d);
+                                fleet2[is_hit].hit(st);
+				if (fleet2[is_hit].is_sunk()) {
+                                        cout << "SUNK " << fleet2[is_hit].get_name() << endl;
+                                        toggle();
+                                        fleet2[is_hit].sink();
+					if (check_win()) {
+						cout << "PLAYER 1 WON" << endl;
+						return RESULT_PLAYER1_WINS;
+					}
+                                        return RESULT_KEEP_PLAYING;
+                                }
+/*				if (check_win()) { // should probably switch this order (hit then sunk then win)
                                 cout << "PLAYER 1 WON" << endl;
                                 return RESULT_PLAYER1_WINS;
                         	}
-				if (fleet2[is_hit].is_sunk()) {
-					cout << "SUNK" << fleet2[is_hit].get_name() << endl;
-					toggle();
-					fleet2[is_hit].sink();
-					return RESULT_KEEP_PLAYING;
-
-				}
-				cout << "Hit!" << endl;
-				int st = fleet2[is_hit].has_coord(d);
-				fleet2[is_hit].hit(st);
-				//
+*/				//
 				toggle();
 				return RESULT_KEEP_PLAYING;
 			}
@@ -82,23 +85,26 @@ public:
                                 cout << "INVALID MOVE" << endl;
                                 return RESULT_INVALID;
                         }
-                        int is_hit = check_coord(d, 1);
+                        int is_hit = check_coord(d, 0);
                         if (is_hit >= 0) {
-                                if (check_win()) {
+				cout << "Hit!" << endl;
+                                int st = fleet1[is_hit].has_coord(d);
+                                fleet1[is_hit].hit(st);
+				if (fleet1[is_hit].is_sunk()) {
+                                        cout << "SUNK " << fleet1[is_hit].get_name() << endl;
+                                        toggle();
+                                        fleet1[is_hit].sink();
+					if (check_win()) {
+						cout << "PLAYER 2 WON" << endl;
+						return RESULT_PLAYER2_WINS;
+					}
+                                        return RESULT_KEEP_PLAYING;
+                                }
+/*                                if (check_win()) {
                                 cout << "PLAYER 2 WON" << endl;
                                 return RESULT_PLAYER2_WINS;
                                 }
-                                if (fleet1[is_hit].is_sunk()) {
-                                        cout << "SUNK" << fleet1[is_hit].get_name() << endl;
-                                        toggle();
-					fleet1[is_hit].sink();
-                                        return RESULT_KEEP_PLAYING;
-
-                                }
-                                cout << "Hit!" << endl;
-                                int st = fleet1[is_hit].has_coord(d);
-                                fleet1[is_hit].hit(st);
-                                //
+*/                                //
                                 toggle();
                                 return RESULT_KEEP_PLAYING;
                         }
@@ -110,9 +116,9 @@ public:
 	bool check_win() {
 		typedef vector<Ship>::iterator iterator;
 		int counter = 0;
-		if (turn == false) {
+		if (turn == true) {
 			for (iterator it = fleet2.begin(); it != fleet2.end(); it++ ) {
-				if (it->is_sunk() == 1) {
+				if (it->is_sunk()==1) {
 					counter++;
 				}
 			}
@@ -121,7 +127,7 @@ public:
 			}
 		} else {
 			for (iterator it = fleet1.begin(); it != fleet1.end(); it++ ) {
-                                if (it->is_sunk() == 1) {
+                                if (it->is_sunk()==1) {
                                         counter++;
                                 }
                         }
