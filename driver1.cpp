@@ -9,8 +9,8 @@ void print(vector<Ship> fleet){
 	}
 }
 
-void placement(BattleshipGame bsgame) {
-	string dif_ships[] = {"AICRAFT CARRIER", "BATTLESHIP", "CRUISER", "SUBMARINE", "DESTROYER"};
+void placement(BattleshipGame& bsgame) {
+	string dif_ships[] = {"AIRCRAFT CARRIER", "BATTLESHIP", "CRUISER", "SUBMARINE", "DESTROYER"};
 	int lengths[] = {5, 4, 3, 3, 2};
 
 	Coord bs = make_pair(1, 1);
@@ -146,6 +146,14 @@ int main() {
 		{
 			BattleshipGame bsgame;
 			placement(bsgame);
+			print(bsgame.fleet1);
+			print(bsgame.fleet2);
+			if (bsgame.fleet1.empty() == true) {
+				cout << "word" << endl;
+			}
+			if (bsgame.fleet2.empty() == true) {
+				cout << "yo" << endl;
+			}
 			string input;
 			while (count1==0) {
 				if (bsgame.turn == false) {
@@ -155,11 +163,15 @@ int main() {
 					if (input.at(0) == 'q' || input.at(0) == 'Q') {
 						exit(1);
 					}
+					if (input.at(0) == 'p') {
+						print(bsgame.fleet1);
+					} else {
 					int first = input.at(0) - '0';
 					int second = input.at(1) - '0';
 					Coord d = make_pair(first, second);
 					if (bsgame.attack_square(d) == RESULT_PLAYER1_WINS) {
 						count1++;
+					}
 					}
 				} else {
 					cout << "PLAYER 2:";
