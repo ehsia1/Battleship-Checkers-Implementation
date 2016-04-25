@@ -38,22 +38,26 @@ public:
 			}
 			for (int i=1; i<=num; i++){
 				if (dir == 'U'){
-					if (check_coord(make_pair(fleet1[str].location.rend()->first.first, fleet1[str].location.rend()->first.second+i),0) == -1 ){
+					if (check_coord(make_pair(fleet1[str].location.rend()->first.first, fleet1[str].location.rend()->first.second+i),0) != -1 ){
+						cout << "a" << endl;
 						return false;
 					}
 				}
 				else if (dir == 'D'){
-					if (check_coord(make_pair(fleet1[str].location.begin()->first.first, fleet1[str].location.begin()->first.second-i),0) !=-1){
+					if (check_coord(make_pair(fleet1[str].location.begin()->first.first, fleet1[str].location.begin()->first.second-i),0) ==-1){
+						cout << "b" << endl;
 						return false;
 					}
 				}
 				else if (dir == 'R'){
 					if (check_coord(make_pair(fleet1[str].location.rend()->first.first+i, fleet1[str].location.rend()->first.second),0) != -1){
+						cout << "c" << endl;
 						return false;
 					}
 				}
 				else if (dir == 'L'){
-					if (check_coord(make_pair(fleet1[str].location.begin()->first.first-i, fleet1[str].location.begin()->first.second),0) !=-1){
+					if (check_coord(make_pair(fleet1[str].location.begin()->first.first-i, fleet1[str].location.begin()->first.second),0) ==-1){
+						cout << "d" << endl;
 						return false;
 					}
 				}
