@@ -123,7 +123,7 @@ public:
 			}
 			return true;
 		}
-		if (dir=='D'){
+		if (dir=='U'){
 			if (lgbtq == 'H'){
 				return false;
 			}
@@ -144,7 +144,7 @@ public:
 			}
 			return true;
 		}
-		if (dir=='U'){
+		if (dir=='D'){
 			if (lgbtq == 'H'){
 				return false;
 			}
