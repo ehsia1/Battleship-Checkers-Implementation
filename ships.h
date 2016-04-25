@@ -110,7 +110,6 @@ public:
 				return false;
 			}
 			for (iterator it = location.begin(); it!= location.end(); it++){
-				cout << "swag";
 				Coord temp = it->first;
 				temp.second -= num;
 				location[temp] = it->second;
