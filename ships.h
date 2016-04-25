@@ -80,6 +80,7 @@ public:
 	bool shift(int num, char dir){
 		typedef map<Coord, int>::iterator iterator;
 		typedef map<Coord, int>::reverse_iterator r_iterator;
+		int count = 0;
 		if (dir=='R'){
 			if (lgbtq == 'V'){
 				return false;
@@ -91,7 +92,13 @@ public:
 				Coord temp = rit->first;
 				temp.second += num;
 				location[temp] = rit->second;
-				location.erase(rit->first);
+//				location.erase(rit->first);
+			}
+			for (iterator it = location.begin(); it != location.end(); it++) {
+				if (count < num) {
+					location.erase(it->first);
+				}
+				count++;
 			}
 			return true;
 		}
@@ -103,14 +110,21 @@ public:
 				return false;
 			}
 			for (iterator it = location.begin(); it!= location.end(); it++){
+				cout << "swag";
 				Coord temp = it->first;
 				temp.second -= num;
 				location[temp] = it->second;
-				location.erase(it->first);
+			//	location.erase(it->first);
+			}
+			for (iterator it = location.end(); it != location.begin(); it--) {
+				if (count <= num) {
+					location.erase(it->first);
+				}
+				count++;
 			}
 			return true;
 		}
-		if (dir=='U'){
+		if (dir=='D'){
 			if (lgbtq == 'H'){
 				return false;
 			}
@@ -121,11 +135,17 @@ public:
 				Coord temp = rit->first;
 				temp.first += num;
 				location[temp] = rit->second;
-				location.erase(rit->first);
+//				location.erase(rit->first);
+			}
+			for (iterator it = location.begin(); it != location.end(); it++) {
+				if (count < num) {
+					location.erase(it->first);
+				}
+				count++;
 			}
 			return true;
 		}
-		if (dir=='D'){
+		if (dir=='U'){
 			if (lgbtq == 'H'){
 				return false;
 			}
@@ -136,7 +156,13 @@ public:
 				Coord temp = it->first;
 				temp.first -= num;
 				location[temp] = it->second;
-				location.erase(it->first);
+//				location.erase(it->first);
+			}
+			for (iterator it = location.end(); it != location.begin(); it--) {
+				if (count <= num) {
+					location.erase(it->first);
+				}
+				count++;
 			}
 			return true;
 		}
