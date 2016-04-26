@@ -78,9 +78,9 @@ public:
 	}
 
 	bool shift(int num, char dir){
+		map<Coord, int> temploc;
 		typedef map<Coord, int>::iterator iterator;
 		typedef map<Coord, int>::reverse_iterator r_iterator;
-		int count = 0;
 		if (dir=='R'){
 			if (lgbtq == 'V'){
 				return false;
@@ -91,15 +91,10 @@ public:
 			for (r_iterator rit = location.rbegin(); rit!= location.rend(); rit++){
 				Coord temp = rit->first;
 				temp.second += num;
-				location[temp] = rit->second;
-//				location.erase(rit->first);
+				temploc[temp] = rit->second;
 			}
-			for (iterator it = location.begin(); it != location.end(); it++) {
-				if (count < num) {
-					location.erase(it->first);
-				}
-				count++;
-			}
+			get_rid();
+			update(temploc);
 			return true;
 		}
 		if (dir=='L'){
@@ -112,15 +107,10 @@ public:
 			for (iterator it = location.begin(); it!= location.end(); it++){
 				Coord temp = it->first;
 				temp.second -= num;
-				location[temp] = it->second;
-			//	location.erase(it->first);
+				temploc[temp] = it->second;
 			}
-			for (iterator it = location.end(); it != location.begin(); it--) {
-				if (count <= num) {
-					location.erase(it->first);
-				}
-				count++;
-			}
+			get_rid();
+			update(temploc);
 			return true;
 		}
 		if (dir=='U'){
@@ -133,15 +123,10 @@ public:
 			for (r_iterator rit = location.rbegin(); rit!=location.rend(); rit++){
 				Coord temp = rit->first;
 				temp.first += num;
-				location[temp] = rit->second;
-//				location.erase(rit->first);
+				temploc[temp] = rit->second;
 			}
-			for (iterator it = location.begin(); it != location.end(); it++) {
-				if (count < num) {
-					location.erase(it->first);
-				}
-				count++;
-			}
+			get_rid();
+			update(temploc);
 			return true;
 		}
 		if (dir=='D'){
@@ -154,15 +139,10 @@ public:
 			for (iterator it = location.begin(); it!=location.end(); it++){
 				Coord temp = it->first;
 				temp.first -= num;
-				location[temp] = it->second;
-//				location.erase(it->first);
+				temploc[temp] = it->second;
 			}
-			for (iterator it = location.end(); it != location.begin(); it--) {
-				if (count <= num) {
-					location.erase(it->first);
-				}
-				count++;
-			}
+			get_rid();
+			update(temploc);
 			return true;
 		}
 		return false;
@@ -208,6 +188,21 @@ public:
 
 private:
 //	map<Coord,int> location;
+
+	void get_rid(){
+		typedef map<Coord, int>::iterator iterator;
+		for (iterator it = location.begin(); it != location.end(); it++){
+			location.erase(it->first);
+		}
+	}
+
+	void update(map<Coord, int> temploc){
+		typedef map<Coord, int>::iterator iterator;
+		for (iterator it = temploc.begin(); it != temploc.end(); it++){
+			location[it->first] = it->second;
+		}
+	}
+
 	string name;
 	char lgbtq; //orientation of ship on board (vertical (V) or horizontal (H)
 	int length;
