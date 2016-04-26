@@ -1,16 +1,16 @@
 #ifndef CHECKERS_PIECE_H
 #define CHECKERS_PIECE_H
 
-#include <utility>
 #include "piece.h"
 #include "game.h"
+#include <map>
 
 using namespace std;
 
 class CPiece: public Piece {
 public:
-	CPiece() {
-		isKing = false;
+	CPiece(Coord c) {
+		piece[c] = 0; //0 if not king
 	}
 
 	int checkKing(Coord c, int counter, bool turn) {
@@ -28,7 +28,7 @@ public:
 		return counter;
 	}
 
-	bool makeKing(int counter) {
+	bool makeKing(int counter) { // if true then change map to 1
 		if (counter > 0) {
 			return true;
 		} else {
@@ -36,6 +36,6 @@ public:
 		}
 	}
 private:
-	bool isKing;
+	map<Coord, int> piece;
 };
 #endif
