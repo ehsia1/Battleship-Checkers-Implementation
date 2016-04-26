@@ -10,45 +10,26 @@ using namespace std;
 class CPiece: public Piece {
 public:
 	CPiece(Coord c) {
-		piece[c] = 0; //0 if not king
+		piece.fisrt = c;
+		piece.second = 0; //0 if not king
 	}
 
-	int checkKing(Coord c, int counter, bool turn) {
-		if (turn == false) {
-			if (c.first == 7) {
-				counter++;
-			}
-		}
-
-		if (turn == true) {
-			if (c.first == 0) {
-				counter++;
-			}
-		}
-		return counter;
+	int checkKing() {
+		return piece.second;
 	}
 
-	void makeKing(int counter) {
-		typedef map<Coord, int>::iterator iterator;
-		if (counter > 0) {
-			for (iterator it = piece.begin(); it != piece.end(); it++) {
-				it->second = 1;
-			}
-		} else {
-			return;
-		}
+	void makeKing() {
+		piece.second = 1;
 	}
 
 	int has_coord(Coord c) {
-		typedef map<Coord, int>::iterator iterator;
-		for (iterator it = piece.begin(); it != piece.end(); it++) {
-			if (it->first == c) {
-				return 1;
-			}
+		if (piece.first == c) {
+			return 1;
 		}
 		return 0;
 	}
 
-	map<Coord, int> piece;
+	pair<Coord, int> piece;
+
 };
 #endif
