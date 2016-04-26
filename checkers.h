@@ -42,18 +42,20 @@ public:
 			if (vert == 'T') {
 				if (lat == 'L') {
 					Coord d = make_pair(c.first++, c.second--);
-					for (iterator it = p2pieces.begin(); it != p2pieces.end(); it++) {
-						if (it->has_coord(d)) {
-							return -1;
-						}
+					if (check_coord(d,0)>-1){
+						return -1;
+					}
+					if (check_coord(d,1)>-1){
+						return -1;
 					}
 					return 1;
 				} else if (lat == 'R') {
 					Coord d = make_pair(c.first++, c.second++);
-					for (iterator it = p2pieces.begin(); it != p2pieces.end(); it++) {
-						if (it->has_coord(d)) {
-							return -2;
-						}
+					if (check_coord(d,0)>-1){
+						return -2;
+					}
+					if (check_coord(d,1)>-1){
+						return -2;
 					}
 					return 2;
 				}
@@ -61,18 +63,20 @@ public:
 				if (vert == 'B') {
 					if (lat == 'L') {
 						Coord d = make_pair(c.first--, c.second--);
-						for (iterator it = p2pieces.begin(); it != p2pieces.end(); it++) {
-							if (it->has_coord(d)) {
-								return -3;
-							}
+						if (check_coord(d,0){
+							return -3;
+						}
+						if (check_coord(d,1){
+							return -3;
 						}
 						return 3;
 					} else if (lat == 'R') {
-						Coord d = make_pair(c.first--, c.second++) {
-						for (iterator it = p2pieces.being(); it != p2pieces.end(); it++) {
-							if (it->has_coord(d)) {
-								return -4;
-							}
+						Coord d = make_pair(c.first--, c.second++);
+						if (check_coord(d,0){
+							return -4;
+						}
+						if (check_coord(d,1){
+							return -4;
 						}
 						return 4;
 					}
@@ -82,38 +86,42 @@ public:
 			if (vert == 'T') {
                                 if (lat == 'L') {
                                         Coord d = make_pair(c.first--, c.second++);
-                                        for (iterator it = p1pieces.begin(); it != p1pieces.end(); it++) {
-                                                if (it->has_coord(d)) {
-                                                        return -10;
-                                                }
-                                        }
+					if (check_coord(d,0){
+						return -10;
+					}
+					if (check_coord(d,1){
+						return -10;
+					}
                                         return 10;
                                 } else if (lat == 'R') {
                                         Coord d = make_pair(c.first--, c.second--);
-                                        for (iterator it = p1pieces.begin(); it != p1pieces.end(); it++) {
-                                                if (it->has_coord(d)) {
-                                                        return -20;
-                                                }
-                                        }
+					if (check_coord(d,0){
+						return -20;
+					}
+					if (check_coord)d,1){
+						return -20;
+					}
                                         return 20;
                                 }
                         } else if (p2pieces[index].piece == 1) {
                                 if (vert == 'B') {
                                         if (lat == 'L') {
                                                 Coord d = make_pair(c.first++, c.second++);
-                                                for (iterator it = p1pieces.begin(); it != p1pieces.end(); it++) {
-                                                        if (it->has_coord(d)) {
-                                                                return -30;
-                                                        }
-                                                }
+						if (check_coord(d,0){
+                                                	return -30;
+						}
+						if (check_coord(d,1){
+							return -30;
+						}
                                                 return 30;
 					} else if (lat == 'R') {
                                                 Coord d = make_pair(c.first++, c.second--) {
-                                                for (iterator it = p1pieces.being(); it != p1pieces.end(); it++) {
-                                                        if (it->has_coord(d)) {
-                                                                return -40;
-                                                        }
-                                                }
+						if (check_coord(d,0){
+							return -40;
+						}
+						if (check_coord(d,1){
+							return -40;
+						}
                                                 return 40;
                                         }
                                 }
@@ -191,7 +199,7 @@ public:
 	}
 	//attack square (move)
 	GameResult attack_square(Coord d, string direction) {
-		direction = toupper(direction);
+		direction = transform(direction.begin(), direction.end(), direction.begin(), toupper);
 		if (turn == false) { //p1piece
 			int index = check_coord(d, 0);
 			if (index >= 0) {
