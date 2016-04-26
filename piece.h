@@ -9,9 +9,10 @@ public:
 
 	Piece() {}
 
-	virtual void shift(int num, char direction) {
+	virtual bool shift(int num, char direction) {
 		num = num;
 		direction = direction;
+		return true;
 	}
 
 	virtual int has_coord(Coord c) {
