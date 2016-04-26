@@ -1,14 +1,19 @@
 #include <utility>
 #include "battleship.h"
 #include "mobile.h"
-#include "checkers.h"
+//#include "checkers.h"
 using namespace std;
 
-void print(vector<Ship> fleet){
-	for (vector<Ship>::iterator it = fleet.begin(); it!=fleet.end(); it++){
-		it->display();
-	}
+ostream& operator<<(ostream& os, vector<Ship> fleet) {
+                for (vector<Ship>::iterator it = fleet.begin(); it!=fleet.end(); it++){
+			cout << it->get_name() << endl;
+			for (map<Coord, int>::iterator it1 = it->location.begin(); it1 != it->location.end(); it1++){
+                        	os<<"("<< it1->first.first <<", "<< it1->first.second <<")"<< " hits: " << it1->second << endl;
+                	}
+		}
+		return os;
 }
+
 
 void placement(BattleshipGame& bsgame) {
 	string dif_ships[] = {"AIRCRAFT CARRIER", "BATTLESHIP", "CRUISER", "SUBMARINE", "DESTROYER"};
@@ -44,7 +49,6 @@ void placement(BattleshipGame& bsgame) {
 						tempCoord.second = second;
 						for (int j=0; j<index; j++){
 							if (it->has_coord(tempCoord) > -1) {
-								//cout << "bad placement"<<endl;
 								share = false;
 								same_pos++;
 							}
@@ -74,11 +78,9 @@ void placement(BattleshipGame& bsgame) {
 			}
 		}
 		if(share){
-			//cout<<"added"<<endl;
 			temp2.set_name(dif_ships[i]);
 			bsgame.fleet1.push_back(temp2);
 		}
-		//print(bsgame.fleet1);
 	}
 
 	for (int i=0; i<5;i++) {
@@ -139,7 +141,7 @@ void placement(BattleshipGame& bsgame) {
         }
 }
 
-void make_ckgame(CheckersGame & ckgame) {
+/*void make_ckgame(CheckersGame & ckgame) {
 	Coord c = make_pair(0,0);
 	for (int i = 0; i < 12; i++) {
 		if (i == 4) {
@@ -163,14 +165,11 @@ void make_ckgame(CheckersGame & ckgame) {
 		ckgame.p2pieces.push_back(temp);
 		d = make_pair(d.first, d.second + 2);
 	}
-}
+}*/
 
 int main() {
 
-	//cout << "CHOOSE A GAME:";
 	char choice = 'k';
-	//cin >> choice;
-
 	while (choice != 'q' && choice != 'Q' && choice != '1' && choice != '2' && choice != '3') {
 		cout << "CHOOSE A GAME:";
 		cin >> choice;
@@ -188,8 +187,12 @@ int main() {
 		{
 			BattleshipGame bsgame;
 			placement(bsgame);
-			print(bsgame.fleet1);
-			print(bsgame.fleet2);
+			//print(bsgame.fleet1);
+			//print(bsgame.fleet2);
+			cout << "PLAYER 1 SHIPS" << endl;
+			cout << bsgame.fleet1;
+			cout<< "PLAYER 2 SHIPS" << endl;
+			cout << bsgame.fleet2;
 			if (bsgame.fleet1.empty() == true) {
 				cout << "word" << endl;
 			}
@@ -205,16 +208,17 @@ int main() {
 					if (input.at(0) == 'q' || input.at(0) == 'Q') {
 						exit(1);
 					}
-					if (input.at(0) == 'p') {
-						print(bsgame.fleet1);
-					} else {
 					int first = input.at(0) - '0';
 					int second = input.at(1) - '0';
 					Coord d = make_pair(first, second);
 					if (bsgame.attack_square(d) == RESULT_PLAYER1_WINS) {
 						count1++;
 					}
-					}
+					cout << "PLAYER 1 SHIPS" << endl;
+		                        cout << bsgame.fleet1;
+                		        cout<< "PLAYER 2 SHIPS" << endl;
+                        		cout << bsgame.fleet2;
+
 				} else {
 					cout << "PLAYER 2:";
                                         cin >> input;
@@ -227,7 +231,11 @@ int main() {
                                         Coord d = make_pair(first, second);
 					if (bsgame.attack_square(d) == RESULT_PLAYER2_WINS) {
                                                 count1++;
-                                        } 
+                                        }
+					cout << "PLAYER 1 SHIPS" << endl;
+		                        cout << bsgame.fleet1;
+                		        cout<< "PLAYER 2 SHIPS" << endl;
+                        		cout << bsgame.fleet2;
 				}
 			}
 			break;
@@ -236,8 +244,12 @@ int main() {
 			{
 			Mobile mobilegame;
                         placement(mobilegame);
-			print(mobilegame.fleet1);
-                        string input;
+			//print(mobilegame.fleet1);
+			cout << "PLAYER 1 SHIPS" << endl;
+                        cout << mobilegame.fleet1;
+			cout << "PLAYER 2 SHIPS" << endl;
+			cout << mobilegame.fleet2;
+			string input;
 			while (count1==0) {
 				if (mobilegame.turn == false) {
 					cout << "PLAYER 1:";
@@ -253,7 +265,11 @@ int main() {
                                         	if (mobilegame.attack_square(d) == RESULT_PLAYER1_WINS) {
                                                 	count1++;
                                         	}
-						print(mobilegame.fleet1);
+						//print(mobilegame.fleet1);
+						cout << "PLAYER 1 SHIPS" << endl;
+                       				cout << mobilegame.fleet1;
+                        			cout << "PLAYER 2 SHIPS" << endl;
+                        			cout << mobilegame.fleet2;
 					} else if (inputLength == 4) {
 						int first = input.at(0) - '0';
 						int second = input.at(1) - '0';
@@ -262,7 +278,11 @@ int main() {
 						Coord c = make_pair(first, second);
 						cout << "moved" << endl;
 						mobilegame.move(c, fourth, third);
-						print(mobilegame.fleet1);
+						//print(mobilegame.fleet1);
+						cout << "PLAYER 1 SHIPS" << endl;
+                        			cout << mobilegame.fleet1;
+                        			cout << "PLAYER 2 SHIPS" << endl;
+                        			cout << mobilegame.fleet2;
 //						mobilegame.toggle();
 					}
 				} else {
@@ -279,6 +299,10 @@ int main() {
                                                 if (mobilegame.attack_square(d) == RESULT_PLAYER2_WINS) {
                                                         count1++;
                                                 }
+						cout << "PLAYER 1 SHIPS" << endl;
+                        			cout << mobilegame.fleet1;
+                        			cout << "PLAYER 2 SHIPS" << endl;
+                        			cout << mobilegame.fleet2;
                                         } else if (inputLength == 4) {
                                                 int first = input.at(0) - '0';
                                                 int second = input.at(1) - '0';
@@ -286,6 +310,10 @@ int main() {
                                                 int fourth = input.at(3) - '0';
                                                 Coord c = make_pair(first, second);
                                                 mobilegame.move(c, fourth, third);
+						cout << "PLAYER 1 SHIPS" << endl;
+                        			cout << mobilegame.fleet1;
+                        			cout << "PLAYER 2 SHIPS" << endl;
+                        			cout << mobilegame.fleet2;
 //						mobilegame.toggle();
                                         }
 				}
@@ -293,9 +321,11 @@ int main() {
 			break;
 		}
 		case '3':
-			CheckersGame ckgame;
+		{
+/*			CheckersGame ckgame;
 			make_ckgame(ckgame);
-			break;
+			break;*/
+		}
 	}
 	return 0;
 }
