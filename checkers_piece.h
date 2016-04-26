@@ -39,7 +39,16 @@ public:
 		}
 	}
 
-private:
+	int has_coord(Coord c) {
+		typedef map<Coord, int>::iterator iterator;
+		for (iterator it = piece.begin(); it != piece.end(); it++) {
+			if (it->first == c) {
+				return 1;
+			}
+		}
+		return 0;
+	}
+
 	map<Coord, int> piece;
 };
 #endif
