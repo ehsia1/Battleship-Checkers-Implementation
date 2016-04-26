@@ -28,13 +28,17 @@ public:
 		return counter;
 	}
 
-	bool makeKing(int counter) { // if true then change map to 1
+	void makeKing(int counter) {
+		typedef map<Coord, int>::iterator iterator;
 		if (counter > 0) {
-			return true;
+			for (iterator it = piece.begin(); it != piece.end(); it++) {
+				it->second = 1;
+			}
 		} else {
-			return false;
+			return;
 		}
 	}
+
 private:
 	map<Coord, int> piece;
 };
