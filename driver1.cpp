@@ -1,6 +1,7 @@
 #include <utility>
 #include "battleship.h"
 #include "mobile.h"
+#include "checkers.h"
 using namespace std;
 
 void print(vector<Ship> fleet){
@@ -138,6 +139,32 @@ void placement(BattleshipGame& bsgame) {
         }
 }
 
+void make_ckgame(CheckersGame & ckgame) {
+	Coord c = make_pair(0,0);
+	for (int i = 0; i < 12; i++) {
+		if (i == 4) {
+			c = make_pair(1,1);
+		} else if (i == 8) {
+			c = make_pair(2,0);
+		}
+		CPiece temp(c);
+		ckgame.p1pieces.push_back(temp);
+		c = make_pair(c.first, c.second + 2);
+	}
+
+	Coord d = make_pair(5,1);
+	for (int i = 0; i < 12; i++) {
+		if (i == 4) {
+			d = make_pair(6,0);
+		} else if (i == 8) {
+			d = make_pair(7,1);
+		}
+		CPiece temp(d);
+		ckgame.p2pieces.push_back(temp);
+		d = make_pair(d.first, d.second + 2);
+	}
+}
+
 int main() {
 
 	//cout << "CHOOSE A GAME:";
@@ -265,7 +292,8 @@ int main() {
 			break;
 		}
 		case '3':
-			//
+			CheckersGame ckgame;
+			make_ckgame(ckgame);
 			break;
 	}
 	return 0;
