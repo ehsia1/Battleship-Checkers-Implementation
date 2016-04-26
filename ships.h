@@ -164,14 +164,6 @@ public:
 		return length;
 	}
 
-	void display(){
-		cout<<name<<": "<<endl;
-		typedef map<Coord, int>::iterator iterator;
-		for (iterator it = location.begin(); it != location.end(); it++){
-			cout<<"("<< it->first.first <<", "<< it->first.second <<")"<< " hits: " << it->second << endl;
-		}
-	}
-
 	void sink(){
 		typedef map<Coord, int>::iterator iterator;
 		for (iterator it = location.begin(); it != location.end(); it++){
@@ -187,8 +179,6 @@ public:
 	map<Coord, int> location;
 
 private:
-//	map<Coord,int> location;
-
 	void get_rid(){
 		typedef map<Coord, int>::iterator iterator;
 		for (iterator it = location.begin(); it != location.end(); it++){
