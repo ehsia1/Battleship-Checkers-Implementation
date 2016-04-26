@@ -9,7 +9,7 @@ public:
 
 	Piece() {}
 
-	virtual void move(int num, char direction) {
+	virtual void shift(int num, char direction) {
 		num = num;
 		direction = direction;
 	}
@@ -20,14 +20,6 @@ public:
 		int third = first + second;
 		third = 1;
 		return third;
-	}
-
-	virtual void hit(int h) {
-		h = h;
-	}
-
-	virtual int is_sunk() {
-		return 1;
 	}
 
 };
