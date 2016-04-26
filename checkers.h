@@ -31,7 +31,7 @@ public:
 				counter++;
 			}
 		}
-		return 0;
+		return -1;
 	}
 
 	int can_move(Coord c, string direction, int index) { //checks if move is valid
@@ -57,7 +57,7 @@ public:
 					}
 					return 2;
 				}
-			} else if (p1pieces[index].piece[c] == 1) {
+			} else if (p1pieces[index].piece == 1) {
 				if (vert == 'B') {
 					if (lat == 'L') {
 						Coord d = make_pair(c.first--, c.second--);
@@ -97,7 +97,7 @@ public:
                                         }
                                         return 20;
                                 }
-                        } else if (p2pieces[index].piece[c] == 1) {
+                        } else if (p2pieces[index].piece == 1) {
                                 if (vert == 'B') {
                                         if (lat == 'L') {
                                                 Coord d = make_pair(c.first++, c.second++);
@@ -194,23 +194,29 @@ public:
 		direction = toupper(direction);
 		if (turn == false) { //p1piece
 			int index = check_coord(d, 0);
-			int mv = can_move(d, direction, index);
-			int jump = can_jump(d, direction, index);
-			if (mv > 0 && jump == 0) { //move it
-				if (mv == 1) { // tl
-				} else if (mv == 2) { // tr
-				} else if (mv == 3) { // bl
-				} else if (mv == 4) { // br
-			}
-			if (jump != 0 && mv == 0) { //jump it
-				if (jump == 1) { //tl
-				} else if (jump == 2) { //tr
-				} else if (jump == 3) { //bl
-				} else if (jump == 4) { //br
+			if (index >= 0) {
+				int mv = can_move(d, direction, index);
+				int jump = can_jump(d, direction, index);
+				if (mv > 0 && jump == 0) { //move it
+					if (mv == 1) { // tl
+					} else if (mv == 2) { // tr
+					} else if (mv == 3) { // bl
+					} else if (mv == 4) { // br
+				}
+				if (jump != 0 && mv == 0) { //jump it
+					if (jump == 1) { //tl
+					} else if (jump == 2) { //tr
+					} else if (jump == 3) { //bl
+					} else if (jump == 4) { //br
+					}
 				}
 			}
 		} else if (turn == true) { //p2piece
 			int index = check_coord(d, 1);
+			if (index >= 0) {
+				int mv = can_move(d, direction, index);
+				int jump = can_jump(d, direction, index);
+			}
 		}
 	//check win
 
