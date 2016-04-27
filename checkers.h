@@ -35,7 +35,6 @@ public:
 	}
 
 	int can_move(Coord c, string direction, int index) { //checks if move is valid
-		typedef vector<CPiece>::iterator iterator;
 		char vert = direction.at(0);
 		char lat = direction.at(1);
 		if (turn == true) {
@@ -65,7 +64,7 @@ public:
 					}
 					return 20;
 				}
-			} else if (p2pieces[index].check_king()) {
+			} else if (p2pieces[index].checkKing()) {
 				if (vert == 'T') {
 					if (lat == 'L') {
 						Coord d = make_pair(c.first--, c.second--);
@@ -121,7 +120,7 @@ public:
 					}
                                         return 2;
                                 }
-                        } else if (p1pieces[index].check_king()) {
+                        } else if (p1pieces[index].checkKing()) {
                                 if (vert == 'B') {
                                         if (lat == 'L') {
                                                 Coord d = make_pair(c.first--, c.second++);
@@ -136,7 +135,7 @@ public:
 						}
                                                 return 3;
 					} else if (lat == 'R') {
-                                                Coord d = make_pair(c.first++, c.second++) {
+                                                Coord d = make_pair(c.first++, c.second++);
 						if (d.first > 7 || d.second > 7){
 							return -1000;
 						}
@@ -157,13 +156,12 @@ public:
 	int can_jump(Coord d, string direction, int index) {
 		int dir = can_move(d, direction, index);
 		int temp;
-		typedef vector<CPiece>::iterator iterator;
 		if (turn == false) {
 			if (dir == -1) { //tl
 				Coord e = make_pair(d.first--, d.second--);
 				temp = can_move(e, direction, index);
 				if (temp == -1000){
-					return //0?;
+					return 0;
 				}
 				if (temp == 1) {
 					return 1;
@@ -173,7 +171,7 @@ public:
 				Coord e = make_pair(d.first++, d.second--);
 				temp = can_move(e, direction, index);
 				if (temp == -1000){
-					return //0?;
+					return 0;
 				}
 				if (temp == 2) {
 					return 2;
@@ -183,7 +181,7 @@ public:
 				Coord e = make_pair(d.first--, d.second++);
 				temp = can_move(e, direction, index);
 				if (temp == -1000){
-					return //0?;
+					return 0;
 				}
 				if (temp == 3) {
 					return 3;
@@ -193,7 +191,7 @@ public:
 				Coord e = make_pair(d.first++, d.second++);
 				temp = can_move(e, direction, index);
 				if (temp == -1000){
-					return //0?;
+					return 0;
 				}
 				if (temp == 4) {
 					return 4;
@@ -205,7 +203,7 @@ public:
                                 Coord e = make_pair(d.first--, d.second++);
                                 temp = can_move(e, direction, index);
 				if (temp==-1000){
-					return //0?;
+					return 0;
 				}
                                 if (temp == 10) {
                                         return -1;
@@ -215,7 +213,7 @@ public:
                                 Coord e = make_pair(d.first++, d.second++);
                                 temp = can_move(e, direction, index);
 				if (temp == -1000){
-					return //0?;
+					return 0;
 				}
                                 if (temp == 20) {
                                         return -2;
@@ -225,7 +223,7 @@ public:
                                 Coord e = make_pair(d.first--, d.second--);
                                 temp = can_move(e, direction, index);
 				if (temp == -1000){
-					return //0?;
+					return 0;
 				}
                                 if (temp == 30) {
                                         return -3;
@@ -235,7 +233,7 @@ public:
                                 Coord e = make_pair(d.first++, d.second--);
                                 temp = can_move(e, direction, index);
 				if (temp == -1000){
-					return //0?;
+					return 0;
 				}
                                 if (temp == 40) {
                                         return -4;
@@ -248,13 +246,12 @@ public:
 
 	//attack square (move)
 	GameResult attack_square(Coord d, string direction) {
-		direction = transform(direction.begin(), direction.end(), direction.begin(), toupper);
 		if (turn == false) { //p1piece
 			int index = check_coord(d, 0);
 			if (index >= 0) {
 				int mv = can_move(d, direction, index);
 				if (mv == -1000){
-					return //invalid move;
+					return RESULT_INVALID;//invalid move;
 				}
 				int jump = can_jump(d, direction, index);
 				if (mv > 0) { //move it
@@ -279,13 +276,16 @@ public:
 					}
 					p2pieces[oindex].jumped();
 				}
+				if (check_win()) {
+					return RESULT_PLAYER1_WINS;
+				}
 			}
 		} else if (turn == true) { //p2piece
 			int index = check_coord(d, 1);
 			if (index >= 0) {
 				int mv = can_move(d, direction, index);
 				if (mv == -1000){
-					return //invalid move;
+					return RESULT_INVALID; //invalid move;
 				}
 				int jump = can_jump(d, direction, index);
 			        if (mv > 0) { //move it
@@ -310,12 +310,36 @@ public:
                                         }
 					p1pieces[oindex].jumped();
                                 }
-
+				if (check_win()) {
+					return RESULT_PLAYER2_WINS;
+				}
 			}
 		}
+		return RESULT_KEEP_PLAYING;
+	}
 	//check win
-
-
+	bool check_win() {
+		typedef vector<CPiece>::iterator iterator;
+		int counter = 0;
+		if (turn == false) {
+			for (iterator it = p2pieces.begin(); it != p2pieces.end(); it++) {
+				if (it->check_jumped() == -1) {
+					counter++;
+				}
+			}
+		} else if (turn == true) {
+			for (iterator it = p1pieces.begin(); it != p1pieces.end(); it++) {
+				if (it->check_jumped() == -1) {
+					counter++;
+				}
+			}
+		}
+		if (counter == 12) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 
 
 	vector<CPiece> p1pieces;
