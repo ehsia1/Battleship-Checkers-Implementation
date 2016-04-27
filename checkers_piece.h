@@ -54,16 +54,19 @@ public:
 			loc.first.second+=num;
 		}
 
-		if (loc.first.second==7){
+		if (loc.first.second==0){
 			return 1;
 		}
-		if (loc.first.second==0){
+		if (loc.first.second==1){
 			return 2;
 		}
 		return 0;
 
 	}
 
+	void print() {
+		cout << "(" << loc.first.first << ", " << loc.first.second << ") king:"<< loc.second << endl;
+	}
 private:
 	pair<Coord, int> loc;
 

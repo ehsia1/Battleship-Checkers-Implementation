@@ -5,15 +5,14 @@
 using namespace std;
 
 ostream& operator<<(ostream& os, vector<Ship> fleet) {
-                for (vector<Ship>::iterator it = fleet.begin(); it!=fleet.end(); it++){
-			cout << it->get_name() << endl;
-			for (map<Coord, int>::iterator it1 = it->location.begin(); it1 != it->location.end(); it1++){
-                        	os<<"("<< it1->first.first <<", "<< it1->first.second <<")"<< " hits: " << it1->second << endl;
-                	}
-		}
-		return os;
+	for (vector<Ship>::iterator it = fleet.begin(); it!=fleet.end(); it++){
+		cout << it->get_name() << endl;
+		for (map<Coord, int>::iterator it1 = it->location.begin(); it1 != it->location.end(); it1++){
+                        os<<"("<< it1->first.first <<", "<< it1->first.second <<")"<< " hits: " << it1->second << endl;
+                }
+	}
+	return os;
 }
-
 
 void placement(BattleshipGame& bsgame) {
 	string dif_ships[] = {"AIRCRAFT CARRIER", "BATTLESHIP", "CRUISER", "SUBMARINE", "DESTROYER"};
@@ -327,13 +326,13 @@ int main() {
 			int count1 = 0;
 			while (count1 == 0) {
 				if (ckgame.turn == false) {
-					cout << "PLAYER 1: " << endl;
+					cout << "PLAYER 1:";
 					cin >> input;
 					if (input.at(0) == 'q' || input.at(0) == 'Q') {
 						exit(1);
 					}
 					int first = input.at(0) - '0';
-					int second = input.at(1) = '0';
+					int second = input.at(1) - '0';
 					char third = input.at(2);
 					char fourth = input.at(3);
 					third = toupper(third);
@@ -343,14 +342,15 @@ int main() {
 					if (ckgame.attack_square(d, direction) == RESULT_PLAYER1_WINS) {
 						count1++;
 					}
+					ckgame.printp();
 				} else {
-					cout << "PLAYER 2: " << endl;
+					cout << "PLAYER 2:";
 					cin >> input;
 					if (input.at(0) == 'q' || input.at(0) == 'Q') {
                                                 exit(1);
                                         }
                                         int first = input.at(0) - '0';
-                                        int second = input.at(1) = '0';
+                                        int second = input.at(1) - '0';
 					char third = input.at(2);
                                         char fourth = input.at(3);
                                         third = toupper(third);
