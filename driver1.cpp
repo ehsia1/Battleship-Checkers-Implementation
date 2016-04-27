@@ -142,28 +142,28 @@ void placement(BattleshipGame& bsgame) {
 }
 
 /*void make_ckgame(CheckersGame & ckgame) {
-	Coord c = make_pair(0,0);
+	Coord c = make_pair(1,0);
 	for (int i = 0; i < 12; i++) {
 		if (i == 4) {
-			c = make_pair(1,1);
+			c = make_pair(0,1);
 		} else if (i == 8) {
-			c = make_pair(2,0);
+			c = make_pair(1,2);
 		}
 		CPiece temp(c);
-		ckgame.p1pieces.push_back(temp);
-		c = make_pair(c.first, c.second + 2);
+		ckgame.p2pieces.push_back(temp);
+		c = make_pair(c.first + 2, c.second);
 	}
 
-	Coord d = make_pair(5,1);
+	Coord d = make_pair(0,5);
 	for (int i = 0; i < 12; i++) {
 		if (i == 4) {
-			d = make_pair(6,0);
+			d = make_pair(1,6);
 		} else if (i == 8) {
-			d = make_pair(7,1);
+			d = make_pair(0,7);
 		}
 		CPiece temp(d);
-		ckgame.p2pieces.push_back(temp);
-		d = make_pair(d.first, d.second + 2);
+		ckgame.p1pieces.push_back(temp);
+		d = make_pair(d.first + 2, d.second);
 	}
 }*/
 
@@ -324,6 +324,37 @@ int main() {
 		{
 /*			CheckersGame ckgame;
 			make_ckgame(ckgame);
+			string input;
+			int count1 = 0;
+			while (count1 == 0) {
+				if (ckgame.turn == false) {
+					cout << "PLAYER 1: " << endl;
+					cin >> input;
+					if (input.at(0) == 'q' || input.at(0) == 'Q') {
+						exit(1);
+					}
+					int first = input.at(0) - '0';
+					int second = input.at(1) = '0';
+					string direction = {input.at(3), input.at(4)};
+					Coord d = make_pair(first, second);
+					if (ckgame.attack_square(c, direction) == RESULT_PLAYER1_WINS) {
+						count1++;
+					}
+				} else {
+					cout << "PLAYER 2: " << endl;
+					cin >> input;
+					if (input.at(0) == 'q' || input.at(0) == 'Q') {
+                                                exit(1);
+                                        }
+                                        int first = input.at(0) - '0';
+                                        int second = input.at(1) = '0';
+                                        string direction = {input.at(3), input.at(4)};
+                                        Coord d = make_pair(first, second);
+                                        if (ckgame.attack_square(c, direction) == RESULT_PLAYER2_WINS) {
+                                                count1++;
+                                        }
+				}
+			}
 			break;*/
 		}
 	}
