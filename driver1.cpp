@@ -1,7 +1,7 @@
 #include <utility>
 #include "battleship.h"
 #include "mobile.h"
-//#include "checkers.h"
+#include "checkers.h"
 using namespace std;
 
 ostream& operator<<(ostream& os, vector<Ship> fleet) {
@@ -141,7 +141,7 @@ void placement(BattleshipGame& bsgame) {
         }
 }
 
-/*void make_ckgame(CheckersGame & ckgame) {
+void make_ckgame(CheckersGame & ckgame) {
 	Coord c = make_pair(1,0);
 	for (int i = 0; i < 12; i++) {
 		if (i == 4) {
@@ -165,7 +165,7 @@ void placement(BattleshipGame& bsgame) {
 		ckgame.p1pieces.push_back(temp);
 		d = make_pair(d.first + 2, d.second);
 	}
-}*/
+}
 
 int main() {
 
@@ -321,7 +321,7 @@ int main() {
 		}
 		case '3':
 		{
-/*			CheckersGame ckgame;
+			CheckersGame ckgame;
 			make_ckgame(ckgame);
 			string input;
 			int count1 = 0;
@@ -334,7 +334,7 @@ int main() {
 					}
 					int first = input.at(0) - '0';
 					int second = input.at(1) = '0';
-					string direction = {input.at(3), input.at(4)};
+					string direction = {toupper(input.at(3)), toupper(input.at(4))};
 					Coord d = make_pair(first, second);
 					if (ckgame.attack_square(c, direction) == RESULT_PLAYER1_WINS) {
 						count1++;
@@ -347,14 +347,14 @@ int main() {
                                         }
                                         int first = input.at(0) - '0';
                                         int second = input.at(1) = '0';
-                                        string direction = {input.at(3), input.at(4)};
+                                        string direction = {toupper(input.at(3)), toupper(input.at(4))};
                                         Coord d = make_pair(first, second);
                                         if (ckgame.attack_square(c, direction) == RESULT_PLAYER2_WINS) {
                                                 count1++;
                                         }
 				}
 			}
-			break;*/
+			break;
 		}
 	}
 	return 0;
