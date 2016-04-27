@@ -276,7 +276,6 @@ int main() {
 						char third = input.at(2);
 						int fourth = input.at(3) - '0';
 						Coord c = make_pair(first, second);
-						cout << "moved" << endl;
 						mobilegame.move(c, fourth, third);
 						//print(mobilegame.fleet1);
 						cout << "PLAYER 1 SHIPS" << endl;
