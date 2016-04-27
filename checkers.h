@@ -258,6 +258,7 @@ public:
 					if (p1pieces[index].move(mv,1)==1){
 						p1pieces[index].makeKing();
 					}
+					toggle();
 				}
 				else if (jump != 0) { //jump it
 					int oindex = -1;
@@ -272,7 +273,7 @@ public:
 					} else if (jump == 3) { //bl
 						oindex = check_coord(make_pair(d.first--,d.second++),1);
 					} else if (jump == 4) { //br
-						oindex = check_coord(make_pair(d.first++,d.second--),1);
+						oindex = check_coord(make_pair(d.first++,d.second++),1);
 					}
 					if (oindex > -1) {
 						p2pieces[oindex].jumped();
@@ -294,6 +295,7 @@ public:
 					if (p2pieces[index].move(mv/10,1)==2){
 						p2pieces[index].makeKing();
 					}
+					toggle();
                                 }
 				else if (jump != 0) { //jump it
                                         int oindex = -1;
