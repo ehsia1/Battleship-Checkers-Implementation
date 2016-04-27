@@ -297,7 +297,7 @@ public:
 					}
 					toggle();
                                 }
-				else if (jump != 0) { //jump it
+				else while (jump != 0) { //jump it
                                         int oindex = -1;
 					if (p2pieces[index].move(jump*-1,2)==2){
 						p2pieces[index].makeKing();
@@ -315,6 +315,10 @@ public:
 					if (oindex > -1) {
 						p1pieces[oindex].jumped();
 					}
+<<<<<<< HEAD
+=======
+
+>>>>>>> bcc493d3d8cd3d552f2102651878574465a61b34
 					int cnt = 0;
 					vector<String> dir;
 					Coord p2temp = p2pieces[index].get_coord();
@@ -339,6 +343,11 @@ public:
 
 					if (cnt>1){
 						cout<<"Multiple Jumps Available, enter jump:(XYSS) "<<endl;
+<<<<<<< HEAD
+=======
+						
+
+>>>>>>> bcc493d3d8cd3d552f2102651878574465a61b34
                                 }
 				if (check_win()) {
 					return RESULT_PLAYER2_WINS;
