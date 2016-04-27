@@ -376,4 +376,17 @@ public:
 
 };
 
+class CheckersBoard: public Board {
+public:
+        CheckersBoard() {
+                for (int i = 0; i < 8; i++) {
+                        for (int j = 0; j < 8; j++) {
+                                ckarray[i][j] = '-';
+                        }
+                }
+        }
+private:
+        char ckarray[8][8];
+};
+
 #endif
