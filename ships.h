@@ -81,8 +81,11 @@ public:
 		map<Coord, int> temploc;
 		typedef map<Coord, int>::iterator iterator;
 		typedef map<Coord, int>::reverse_iterator r_iterator;
-		if (dir=='R'){
-			if (lgbtq == 'V'){
+		if (num <= 0){
+			return false;
+		}
+		if (dir=='U'){
+			if (lgbtq == 'H'){
 				return false;
 			}
 			if (location.rbegin()->first.second + num >9){
@@ -97,8 +100,8 @@ public:
 			update(temploc);
 			return true;
 		}
-		if (dir=='L'){
-			if (lgbtq == 'V'){
+		if (dir=='D'){
+			if (lgbtq == 'H'){
 				return false;
 			}
 			if (location.begin()->first.second - num <0){
@@ -113,8 +116,8 @@ public:
 			update(temploc);
 			return true;
 		}
-		if (dir=='U'){
-			if (lgbtq == 'H'){
+		if (dir=='R'){
+			if (lgbtq == 'V'){
 				return false;
 			}
 			if (location.rbegin()->first.first + num >9){
@@ -129,8 +132,8 @@ public:
 			update(temploc);
 			return true;
 		}
-		if (dir=='D'){
-			if (lgbtq == 'H'){
+		if (dir=='L'){
+			if (lgbtq == 'V'){
 				return false;
 			}
 			if (location.begin()->first.first - num <0){
