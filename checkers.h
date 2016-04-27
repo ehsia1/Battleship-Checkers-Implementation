@@ -261,49 +261,23 @@ public:
 					if (p1pieces[index].move(mv,1)==1){
 						p1pieces[index].makeKing();
 					}
-					/*
-					if (mv == 1) { // tl
-						p1pieces[index].first.first--;
-						p1pieces[index].first.second--;
-					} else  if (mv == 2) { // tr
-						p1pieces[index].first.first++;
-						p1pieces[index].first.second--;
-					} else if (mv == 3) { // bl
-						p1pieces[index].first.first--;
-						p1pieces[index].first.second++;
-					} else if (mv == 4) { // br
-						p1pieces[index].first.first++;
-						p1pieces[index].first.second++;
-					}*/
 				}
 				else if (jump != 0) { //jump it
 					int oindex;
 					if (p1pieces[index].move(jump,2)==1){
 						p1pieces[index].makeKing();
 					}
-					p2pieces[oindex].jumped();
-					/*
+
 					if (jump == 1) { //tl
-						p1pieces[index].first.first -=2;
-						p1pieces[index].first.second -=2;
 						oindex = check_coord(make_pair(d.first--,d.second--),1);
-						jump(p2pieces[oindex]);
 					} else if (jump == 2) { //tr
-						p1pieces[index].first.first += 2;
-						p1pieces[index].first.second -= 2;
 						oindex = check_coord(make_pair(d.first++,d.second--),1);
-						jump(p2pieces[oindex]);
 					} else if (jump == 3) { //bl
-						p1pieces[index].first.first -=2;
-						p1pieces[index].first.second +=2;
 						oindex = check_coord(make_pair(d.first--,d.second++),1);
-						jump(p2pieces[oindex]);
 					} else if (jump == 4) { //br
-						p1pieces[index].first.first +=2;
-						p1pieces[index].first.second -=2;
 						oindex = check_coord(make_pair(d.first++,d.second--),1);
-						jump(p2pieces[oindex]);
-					}*/
+					}
+					p2pieces[oindex].jumped();
 				}
 			}
 		} else if (turn == true) { //p2piece
@@ -318,50 +292,23 @@ public:
 					if (p2pieces[index].move(mv/10,1)==2){
 						p2pieces[index].makeKing();
 					}
-					/*
-                                        if (mv == 10) { // bl
-                                                p2pieces[index].first.first--;
-                                                p2pieces[index].first.second++;
-                                        } else if (mv == 20) { // br
-                                                p2pieces[index].first.first++;
-                                                p2pieces[index].first.second++;
-                                        } else if (mv == 30) { // tl
-                                                p2pieces[index].first.first--;
-                                                p2pieces[index].first.second--;
-                                        } else if (mv == 40) { // tr
-                                                p2pieces[index].first.first++;
-                                                p2pieces[index].first.second--;
-                                        }*/
                                 }
 				else if (jump != 0) { //jump it
                                         int oindex;
 					if (p2pieces[index].move(jump*-1,2)==2){
 						p2pieces[index].makeKing();
 					}
-					p1pieces[oindex].jumped();
-					/*
+
                                         if (jump == -1) { //bl
-                                                p2pieces[index].first.first -= 2;
-                                                p2pieces[index].first.second +=2;
                                                 oindex = check_coord(make_pair(d.first--,d.second++),0);
-                                                jump(p1pieces[oindex]);
                                         } else if (jump == -2) { //br
-                                                p2pieces[index].first.first += 2;
-                                                p2pieces[index].first.second += 2;
                                                 oindex = check_coord(make_pair(d.first++,d.second++),0);
-                                                jump(p1pieces[oindex]);
                                         } else if (jump == -3) { //tl
-                                                p2pieces[index].first.first -=2;
-                                                p2pieces[index].first.second -=2;
                                                 oindex = check_coord(make_pair(d.first--,d.second--),0);
-                                                jump(p1pieces[oindex]);
                                         } else if (jump == -4) { //tr
-                                                p2pieces[index].first.first +=2;
-                                                p2pieces[index].first.second -=2;
                                                 oindex = check_coord(make_pair(d.first++,d.second--),0);
-						jump(p1pieces[oindex]);
                                         }
-					*/
+					p1pieces[oindex].jumped();
                                 }
 
 			}
