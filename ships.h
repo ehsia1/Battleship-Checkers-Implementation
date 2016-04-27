@@ -84,7 +84,7 @@ public:
 		if (num <= 0){
 			return false;
 		}
-		if (dir=='U'){
+		if (dir=='D'){
 			if (lgbtq == 'H'){
 				return false;
 			}
@@ -100,7 +100,7 @@ public:
 			update(temploc);
 			return true;
 		}
-		if (dir=='D'){
+		if (dir=='U'){
 			if (lgbtq == 'H'){
 				return false;
 			}

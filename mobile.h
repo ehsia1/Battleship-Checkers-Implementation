@@ -36,12 +36,12 @@ public:
 				return false;
 			}
 			for (int i=1; i<=num; i++){
-				if (dir == 'U'){
+				if (dir == 'D'){
 					if (check_coord(make_pair(fleet1[str].location.rbegin()->first.first, fleet1[str].location.rbegin()->first.second+i),0) != -1 ){
 						return false;
 					}
 				}
-				else if (dir == 'D'){
+				else if (dir == 'U'){
 					if (check_coord(make_pair(fleet1[str].location.begin()->first.first, fleet1[str].location.begin()->first.second-i),0) !=-1){
 						return false;
 					}
@@ -69,12 +69,12 @@ public:
 				return false;
 			}
 			for (int i=1; i<=num; i++){
-                                if (dir == 'U'){
+                                if (dir == 'D'){
                                         if (check_coord(make_pair(fleet2[str].location.rbegin()->first.first, fleet2[str].location.rbegin()->first.second+i),1) != -1){
                                                 return false;
                                         }
                                 }
-                                else if (dir == 'D'){
+                                else if (dir == 'U'){
                                         if (check_coord(make_pair(fleet2[str].location.begin()->first.first, fleet2[str].location.begin()->first.second-i),1) != -1){
                                                 return false;
                                         }
