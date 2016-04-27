@@ -260,7 +260,7 @@ public:
 					}
 				}
 				else if (jump != 0) { //jump it
-					int oindex;
+					int oindex = -1;
 					if (p1pieces[index].move(jump,2)==1){
 						p1pieces[index].makeKing();
 					}
@@ -274,7 +274,9 @@ public:
 					} else if (jump == 4) { //br
 						oindex = check_coord(make_pair(d.first++,d.second--),1);
 					}
-					p2pieces[oindex].jumped();
+					if (oindex > -1) {
+						p2pieces[oindex].jumped();
+					}
 				}
 				if (check_win()) {
 					return RESULT_PLAYER1_WINS;
@@ -294,7 +296,7 @@ public:
 					}
                                 }
 				else if (jump != 0) { //jump it
-                                        int oindex;
+                                        int oindex = -1;
 					if (p2pieces[index].move(jump*-1,2)==2){
 						p2pieces[index].makeKing();
 					}
@@ -308,7 +310,9 @@ public:
                                         } else if (jump == -4) { //tr
                                                 oindex = check_coord(make_pair(d.first++,d.second--),0);
                                         }
-					p1pieces[oindex].jumped();
+					if (oindex > -1) {
+						p1pieces[oindex].jumped();
+					}
                                 }
 				if (check_win()) {
 					return RESULT_PLAYER2_WINS;

@@ -334,9 +334,13 @@ int main() {
 					}
 					int first = input.at(0) - '0';
 					int second = input.at(1) = '0';
-					string direction = {toupper(input.at(3)), toupper(input.at(4))};
+					char third = input.at(2);
+					char fourth = input.at(3);
+					third = toupper(third);
+					fourth = toupper(fourth);
+					string direction = {third, fourth};
 					Coord d = make_pair(first, second);
-					if (ckgame.attack_square(c, direction) == RESULT_PLAYER1_WINS) {
+					if (ckgame.attack_square(d, direction) == RESULT_PLAYER1_WINS) {
 						count1++;
 					}
 				} else {
@@ -347,9 +351,13 @@ int main() {
                                         }
                                         int first = input.at(0) - '0';
                                         int second = input.at(1) = '0';
-                                        string direction = {toupper(input.at(3)), toupper(input.at(4))};
+					char third = input.at(2);
+                                        char fourth = input.at(3);
+                                        third = toupper(third);
+                                        fourth = toupper(fourth);
+                                        string direction = {third, fourth};
                                         Coord d = make_pair(first, second);
-                                        if (ckgame.attack_square(c, direction) == RESULT_PLAYER2_WINS) {
+                                        if (ckgame.attack_square(d, direction) == RESULT_PLAYER2_WINS) {
                                                 count1++;
                                         }
 				}
