@@ -297,7 +297,7 @@ public:
 					}
 					toggle();
                                 }
-				else if (jump != 0) { //jump it
+				else while (jump != 0) { //jump it
                                         int oindex = -1;
 					if (p2pieces[index].move(jump*-1,2)==2){
 						p2pieces[index].makeKing();
@@ -315,6 +315,33 @@ public:
 					if (oindex > -1) {
 						p1pieces[oindex].jumped();
 					}
+
+					int cnt = 0;
+					vector<String> dir;
+					Coord p2temp = p2pieces[index].get_coord();
+					if (can_jump(p2temp, "BL", index){
+						cnt++;
+						dir.push_back("BL");
+					}
+					if (can_jump(p2temp, "BR", index){
+						cnt++;
+						dir.push_back("BR");
+					}
+					if (p2pieces[index].checkKing()){
+						if (can_jump(p2temp, "TL", index){
+							cnt++;
+							dir.push_back("TL");
+						}
+						if (can_jump(p2temp, "TR", index){
+							cnt++;
+							dir.push_back("TR");
+						}
+					}
+
+					if (cnt>1){
+						cout<<"Multiple Jumps Available, enter jump:(XYSS) "<<endl;
+						
+
                                 }
 				if (check_win()) {
 					return RESULT_PLAYER2_WINS;
