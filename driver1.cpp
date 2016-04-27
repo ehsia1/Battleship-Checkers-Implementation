@@ -52,9 +52,9 @@ void placement(BattleshipGame& bsgame) {
 								share = false;
 								same_pos++;
 							}
-							if (direction == 'H'){
+							if (direction == 'V'){
 								tempCoord.second++;
-							}else if (direction == 'V'){
+							}else if (direction == 'H'){
 								tempCoord.first++;
 							}
 						}
@@ -110,9 +110,9 @@ void placement(BattleshipGame& bsgame) {
                                                                 share = false;
 								same_pos++;
                                                         }
-        	        	                        if (direction == 'H'){
+        	        	                        if (direction == 'V'){
         	                	                        tempCoord.second++;
-        	                        	        }else if (direction == 'V'){
+        	                        	        }else if (direction == 'H'){
         	                                	        tempCoord.first++;
         	                              		}
 						}

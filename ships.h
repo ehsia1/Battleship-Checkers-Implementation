@@ -15,7 +15,7 @@ public:
 		length = num;
 		if ((c.first > 9) || (c.first<0) || (c.second > 9) || (c.second<0)) {
 			cout << "Off the board!" << endl;
-		} else if (direction == 'H') {
+		} else if (direction == 'V') {
 			if (num+c.second < 10) {
 				lgbtq = direction;
 				for (int i=0;i<num;i++) {
@@ -25,7 +25,7 @@ public:
 			} else {
 				cout << "Off the board!" << endl;
 			}
-		} else if (direction == 'V') {
+		} else if (direction == 'H') {
 			if (num+c.first < 10) {
 				lgbtq = direction;
 				for (int i=0;i<num;i++) {
