@@ -10,7 +10,7 @@ using namespace std;
 class CPiece: public Piece {
 public:
 	CPiece(Coord c) {
-		loc.fisrt = c;
+		loc.first = c;
 		loc.second = 0; //0 if not king
 	}
 
@@ -39,7 +39,7 @@ public:
 		loc.second = -1;
 	}
 
-	void move(int dir, int num){
+	int move(int dir, int num){
 		if (dir == 1) { // tl
 			loc.first.first-=num;
 			loc.first.second-=num;
@@ -53,6 +53,15 @@ public:
 			loc.first.first+=num;
 			loc.first.second+=num;
 		}
+
+		if (loc.first.second==7){
+			return 1;
+		}
+		if (loc.first.second==0){
+			return 2;
+		}
+		return 0;
+
 	}
 
 private:

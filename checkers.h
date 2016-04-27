@@ -65,7 +65,7 @@ public:
 					}
 					return 20;
 				}
-			} else if (p2pieces[index].second == 1) {
+			} else if (p2pieces[index].check_king()) {
 				if (vert == 'T') {
 					if (lat == 'L') {
 						Coord d = make_pair(c.first--, c.second--);
@@ -121,7 +121,7 @@ public:
 					}
                                         return 2;
                                 }
-                        } else if (p1pieces[index].second == 1) {
+                        } else if (p1pieces[index].check_king()) {
                                 if (vert == 'B') {
                                         if (lat == 'L') {
                                                 Coord d = make_pair(c.first--, c.second++);
@@ -245,6 +245,7 @@ public:
 		}
 		return 0;
 	}
+
 	//attack square (move)
 	GameResult attack_square(Coord d, string direction) {
 		direction = transform(direction.begin(), direction.end(), direction.begin(), toupper);
@@ -257,6 +258,10 @@ public:
 				}
 				int jump = can_jump(d, direction, index);
 				if (mv > 0) { //move it
+					if (p1pieces[index].move(mv,1)==1){
+						p1pieces[index].makeKing();
+					}
+					/*
 					if (mv == 1) { // tl
 						p1pieces[index].first.first--;
 						p1pieces[index].first.second--;
@@ -269,10 +274,15 @@ public:
 					} else if (mv == 4) { // br
 						p1pieces[index].first.first++;
 						p1pieces[index].first.second++;
-					}
+					}*/
 				}
 				else if (jump != 0) { //jump it
 					int oindex;
+					if (p1pieces[index].move(jump,2)==1){
+						p1pieces[index].makeKing();
+					}
+					p2pieces[oindex].jumped();
+					/*
 					if (jump == 1) { //tl
 						p1pieces[index].first.first -=2;
 						p1pieces[index].first.second -=2;
@@ -293,7 +303,7 @@ public:
 						p1pieces[index].first.second -=2;
 						oindex = check_coord(make_pair(d.first++,d.second--),1);
 						jump(p2pieces[oindex]);
-					}
+					}*/
 				}
 			}
 		} else if (turn == true) { //p2piece
@@ -305,6 +315,10 @@ public:
 				}
 				int jump = can_jump(d, direction, index);
 			        if (mv > 0) { //move it
+					if (p2pieces[index].move(mv/10,1)==2){
+						p2pieces[index].makeKing();
+					}
+					/*
                                         if (mv == 10) { // bl
                                                 p2pieces[index].first.first--;
                                                 p2pieces[index].first.second++;
@@ -317,10 +331,15 @@ public:
                                         } else if (mv == 40) { // tr
                                                 p2pieces[index].first.first++;
                                                 p2pieces[index].first.second--;
-                                        }
+                                        }*/
                                 }
 				else if (jump != 0) { //jump it
                                         int oindex;
+					if (p2pieces[index].move(jump*-1,2)==2){
+						p2pieces[index].makeKing();
+					}
+					p1pieces[oindex].jumped();
+					/*
                                         if (jump == -1) { //bl
                                                 p2pieces[index].first.first -= 2;
                                                 p2pieces[index].first.second +=2;
@@ -342,6 +361,7 @@ public:
                                                 oindex = check_coord(make_pair(d.first++,d.second--),0);
 						jump(p1pieces[oindex]);
                                         }
+					*/
                                 }
 
 			}
