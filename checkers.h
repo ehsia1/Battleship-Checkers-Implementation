@@ -307,14 +307,23 @@ public:
 
 					if (jump == 1) { //tl
 						oindex = check_coord(make_pair(d.first--,d.second--),1);
+						d.first-=2;
+						d.second-=2;
 					} else if (jump == 2) { //tr
 						oindex = check_coord(make_pair(d.first++,d.second--),1);
+						d.first+=2;
+						d.second-=2;
 					} else if (jump == 3) { //bl
 						oindex = check_coord(make_pair(d.first--,d.second++),1);
+						d.first-=2;
+						d.second+=2;
 					} else if (jump == 4) { //br
 						oindex = check_coord(make_pair(d.first++,d.second++),1);
+						d.first+=2;
+						d.second+=2;
 					}
 					if (oindex > -1) {
+						cout<<"p2 get jumped brah"<<endl;
 						p2pieces[oindex].jumped();
 					}
 					//check for additional jumps
@@ -403,12 +412,20 @@ public:
 
                                         if (jump == -1) { //tl
                                                 oindex = check_coord(make_pair(d.first-1,d.second-1),0);
+						d.first-=2;
+						d.second-=2;
                                         } else if (jump == -2) { //tr
                                                 oindex = check_coord(make_pair(d.first+1,d.second-1),0);
+						d.first+=2;
+						d.second-=2;
                                         } else if (jump == -3) { //bl
                                                 oindex = check_coord(make_pair(d.first-1,d.second+1),0);
+						d.first-=2;
+						d.second+=2;
                                         } else if (jump == -4) { //br
                                                 oindex = check_coord(make_pair(d.first+1,d.second+1),0);
+						d.first+=2;
+						d.second+=2;
                                         }
 					if (oindex > -1) {
 						p1pieces[oindex].jumped();
