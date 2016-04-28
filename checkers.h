@@ -439,7 +439,7 @@ public:
 							dir.push_back("TR");
 						}
 					}
-					string ndir;
+					string ndir = "GL";
 					if (cnt>=1){
 						ndir = dir[0];
 					}
