@@ -53,7 +53,7 @@ public:
 						return -1000;
 					}
 					if (check_coord(d,1)>-1){
-						return -330;
+						return -1000;
 					}
 					if (check_coord(d,0)>-1){
 						return -30;
@@ -65,7 +65,7 @@ public:
 						return -1000;
 					}
 					if (check_coord(d,1)>-1){
-						return -440;
+						return -1000;
 					}
 					if (check_coord(d,2)>-1){
 						return -40;
@@ -80,7 +80,7 @@ public:
 							return -1000;
 						}
 						if (check_coord(d,1) > -1){
-							return -110;
+							return -1000;
 						}
 						if (check_coord(d,0) > -1){
 							return -10;
@@ -92,7 +92,7 @@ public:
 							return -1000;
 						}
 						if (check_coord(d,1) > -1){
-							return -220;
+							return -1000;
 						}
 						if (check_coord(d,0) > -1){
 							return -20;
