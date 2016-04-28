@@ -351,9 +351,7 @@ public:
 					string ndir = "GL";
 					if (cnt>=1){
 						ndir = dir[0];
-					}
-					if (cnt>1){
-						cout<<"Multiple Jumps Available, enter jump:(XYSS) "<<endl;
+						cout<<"Player1:"<<endl;
 						string in;
 						cin>>in;
 						cout<<endl;
@@ -457,9 +455,7 @@ public:
 					string ndir = "GL";
 					if (cnt>=1){
 						ndir = dir[0];
-					}
-					if (cnt>1){
-						cout<<"Multiple Jumps Available, enter jump:(XYSS) "<<endl;
+						cout<<"Player 2:"<<endl;
 						string in;
 						cin>>in;
 						cout<<endl;
@@ -496,13 +492,13 @@ public:
 	bool check_win() {
 		typedef vector<CPiece>::iterator iterator;
 		int counter = 0;
-		if (turn == false) {
+		if (turn == true) {
 			for (iterator it = p2pieces.begin(); it != p2pieces.end(); it++) {
 				if (it->check_jumped() == -1) {
 					counter++;
 				}
 			}
-		} else if (turn == true) {
+		} else if (turn == false) {
 			for (iterator it = p1pieces.begin(); it != p1pieces.end(); it++) {
 				if (it->check_jumped() == -1) {
 					counter++;
