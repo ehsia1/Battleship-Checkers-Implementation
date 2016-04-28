@@ -360,6 +360,7 @@ int main() {
                                         if (ckgame.attack_square(d, direction) == RESULT_PLAYER2_WINS) {
                                                 count1++;
                                         }
+					ckgame.printp();
 				}
 			}
 			break;
