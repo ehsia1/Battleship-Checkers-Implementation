@@ -282,20 +282,20 @@ public:
 					int cnt = 0;
 					vector<String> dir;
 					Coord p1temp = p1pieces[index].get_coord();
-					if (can_jump(p1temp, "TL", index){
+					if (can_jump(p1temp, "TL", index)){
 						cnt++;
 						dir.push_back("TL");
 					}
-					if (can_jump(p1temp, "TR", index){
+					if (can_jump(p1temp, "TR", index)){
 						cnt++;
 						dir.push_back("TR");
 					}
 					if (p1pieces[index].checkKing()){
-						if (can_jump(p1temp, "BL", index){
+						if (can_jump(p1temp, "BL", index)){
 							cnt++;
 							dir.push_back("BL");
 						}
-						if (can_jump(p1temp, "BR", index){
+						if (can_jump(p1temp, "BR", index)){
 							cnt++;
 							dir.push_back("BR");
 						}
@@ -368,20 +368,20 @@ public:
 					int cnt = 0;
 					vector<String> dir;
 					Coord p2temp = p2pieces[index].get_coord();
-					if (can_jump(p2temp, "BL", index){
+					if (can_jump(p2temp, "BL", index)){
 						cnt++;
 						dir.push_back("BL");
 					}
-					if (can_jump(p2temp, "BR", index){
+					if (can_jump(p2temp, "BR", index)){
 						cnt++;
 						dir.push_back("BR");
 					}
 					if (p2pieces[index].checkKing()){
-						if (can_jump(p2temp, "TL", index){
+						if (can_jump(p2temp, "TL", index)){
 							cnt++;
 							dir.push_back("TL");
 						}
-						if (can_jump(p2temp, "TR", index){
+						if (can_jump(p2temp, "TR", index)){
 							cnt++;
 							dir.push_back("TR");
 						}
