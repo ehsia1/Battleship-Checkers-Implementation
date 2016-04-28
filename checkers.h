@@ -38,7 +38,13 @@ public:
 
 	int can_move(Coord c, string direction, int index) { //checks if move is valid
 		char vert = direction.at(0);
+		if (vert != 'B' && vert != 'T'){
+			return 0;
+		}
 		char lat = direction.at(1);
+		if (lat != 'R' && lat != 'L'){
+			return 0;
+		}
 		if (turn == true) {
 			if (vert == 'B') {
 				if (lat == 'L') {
@@ -246,17 +252,41 @@ public:
 		return 0;
 	}
 
-	/*bool is_jump(){
-		typedef vector<Coord, int>::iterator iterator;
+	bool is_jump(){
+		typedef vector<CPiece>::iterator iterator;
 		if (turn == false){
+			int count = 0;
 			for (iterator it = p1pieces.begin(); it != p1pieces.end(); it++){
-				if (can_jump !=0){
-*/
+				Coord tcd = it->get_coord();
+				if (can_jump(tcd,"TR",count)>0 || can_jump(tcd,"TL",count)>0 || can_jump(tcd,"BL",count)>0 || can_jump(tcd,"BR",count)>0){
+					return true;
+				}
+				count++;
+			}
+		}
+		else if (turn == true){
+			int count = 0;
+			for (iterator it = p2pieces.begin(); it != p2pieces.end(); it++){
+				Coord tcd = it->get_coord();
+				if (can_jump(tcd,"TR",count)<0 || can_jump(tcd,"TL",count)<0 || can_jump(tcd,"BL",count)<0 || can_jump(tcd,"BR",count)<0){
+					return true;
+				}
+				count++;
+			}
+		}
+		return false;
+	}
+
 	//attack square (move)
 	GameResult attack_square(Coord d, string direction) {
 		if (turn == false) { //p1piece
 			int index = check_coord(d, 0);
 			if (index >= 0) {
+				if (is_jump()){
+					if (can_jump(d, direction, index) == 0){
+						return RESULT_INVALID;
+					}
+				}
 				int mv = can_move(d, direction, index);
 				if (mv == -1000){
 					return RESULT_INVALID;//invalid move;
@@ -265,6 +295,8 @@ public:
 				if (mv > 0) { //move it
 					if (p1pieces[index].move(mv,1)==1){
 						p1pieces[index].makeKing();
+						toggle();
+						return RESULT_KEEP_PLAYING;
 					}
 					toggle();
 				}
@@ -272,6 +304,8 @@ public:
 					int oindex = -1;
 					if (p1pieces[index].move(jump,2)==1){
 						p1pieces[index].makeKing();
+						toggle();
+						return RESULT_KEEP_PLAYING;
 					}
 
 					if (jump == 1) { //tl
@@ -339,10 +373,17 @@ public:
 				if (check_win()) {
 					return RESULT_PLAYER1_WINS;
 				}
-			}
+			}else return RESULT_INVALID;
 		} else while (turn == true) { //p2piece
 			int index = check_coord(d, 1);
 			if (index >= 0) {
+				if (is_jump()){
+					cout<<"should force jump"<<endl;
+                                        if (can_jump(d, direction, index) == 0){
+						cout<<"bad coordinate/piece"<<endl;
+                                                return RESULT_INVALID;
+                                        }
+                                }
 				int mv = can_move(d, direction, index);
 				if (mv == -1000){
 					return RESULT_INVALID; //invalid move;
@@ -429,7 +470,7 @@ public:
 				if (check_win()) {
 					return RESULT_PLAYER2_WINS;
 				}
-			}
+			}else return RESULT_INVALID;
 		}
 		return RESULT_KEEP_PLAYING;
 	}
