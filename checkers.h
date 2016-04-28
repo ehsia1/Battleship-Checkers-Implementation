@@ -67,7 +67,7 @@ public:
 					if (check_coord(d,1)>-1){
 						return -1000;
 					}
-					if (check_coord(d,2)>-1){
+					if (check_coord(d,0)>-1){
 						return -40;
 					}
 					return 40;
