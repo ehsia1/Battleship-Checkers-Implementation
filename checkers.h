@@ -5,6 +5,8 @@
 #include "checkers_piece.h"
 #include <utility>
 #include <vector>
+#include <string>
+#include <iostream>
 using namespace std;
 
 
@@ -280,7 +282,7 @@ public:
 					}
 					//check for additional jumps
 					int cnt = 0;
-					vector<String> dir;
+					vector<string> dir;
 					Coord p1temp = p1pieces[index].get_coord();
 					if (can_jump(p1temp, "TL", index)){
 						cnt++;
@@ -300,13 +302,13 @@ public:
 							dir.push_back("BR");
 						}
 					}
-					String newdir;
+					string ndir;
 					if (cnt>=1){
-						newdir = dir[0];
+						ndir = dir[0];
 					}
 					if (cnt>1){
 						cout<<"Multiple Jumps Available, enter jump:(XYSS) "<<endl;
-						String in;
+						string in;
 						cin>>in;
 						cout<<endl;
 						Coord t = make_pair(in.at(0)-'0',in.at(1)-'0');
@@ -315,10 +317,10 @@ public:
 						}
 						char third = toupper(in.at(2));
 						char fourth = toupper(in.at(3));
-						String newdir = {third, fourth};
+						string ndir = {third, fourth};
 						bool check = false;
-						for (vector<String>::iterator it = newdir.begin(); it != newdir.end(); it++){
-							if (newdir.compare((*it))){
+						for (vector<string>::iterator it = dir.begin(); it != dir.end(); it++){
+							if (ndir.compare((*it))){
 								check = true;
 							}
 						}
@@ -326,7 +328,7 @@ public:
 							return RESULT_INVALID;
 						}
 					}
-					jump = can_jump(p1temp,newdir,index);
+					jump = can_jump(p1temp,ndir,index);
 				}
 				if (check_win()) {
 					return RESULT_PLAYER1_WINS;
@@ -366,7 +368,7 @@ public:
 					}
 					//check for additional jumps
 					int cnt = 0;
-					vector<String> dir;
+					vector<string> dir;
 					Coord p2temp = p2pieces[index].get_coord();
 					if (can_jump(p2temp, "BL", index)){
 						cnt++;
@@ -386,13 +388,13 @@ public:
 							dir.push_back("TR");
 						}
 					}
-					String newdir;
+					string ndir;
 					if (cnt>=1){
-						newdir = dir[0];
+						ndir = dir[0];
 					}
 					if (cnt>1){
 						cout<<"Multiple Jumps Available, enter jump:(XYSS) "<<endl;
-						String in;
+						string in;
 						cin>>in;
 						cout<<endl;
 						Coord t = make_pair(in.at(0)-'0',in.at(1)-'0');
@@ -401,10 +403,10 @@ public:
 						}
 						char third = toupper(in.at(2));
 						char fourth = toupper(in.at(3));
-						String newdir = {third, fourth};
+						string ndir = {third, fourth};
 						bool check = false;
-						for (vector<String>::iterator it = newdir.begin(); it != newdir.end(); it++){
-							if (newdir.compare((*it))){
+						for (vector<string>::iterator it = dir.begin(); it != dir.end(); it++){
+							if (ndir.compare((*it))){
 								check = true;
 							}
 						}
@@ -412,7 +414,7 @@ public:
 							return RESULT_INVALID;
 						}
 					}
-					jump = can_jump(p2temp,newdir,index);
+					jump = can_jump(p2temp,ndir,index);
                                 }
 				if (check_win()) {
 					return RESULT_PLAYER2_WINS;
