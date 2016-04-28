@@ -288,7 +288,7 @@ public:
 					}
 				}
 				int mv = can_move(d, direction, index);
-				if (mv == -1000){
+				if (mv == -1000 || mv == 0){
 					return RESULT_INVALID;//invalid move;
 				}
 				int jump = can_jump(d, direction, index);
@@ -329,6 +329,7 @@ public:
 					int cnt = 0;
 					vector<string> dir;
 					Coord p1temp = p1pieces[index].get_coord();
+					cout<<"player 1 coord aftet jump "<< p1temp.first << p1temp.second << endl;
 					if (can_jump(p1temp, "TL", index)){
 						cnt++;
 						dir.push_back("TL");
@@ -347,15 +348,16 @@ public:
 							dir.push_back("BR");
 						}
 					}
-					string ndir = "GL";
+					string ndir = "GJ";
 					if (cnt>=1){
-						ndir = dir[0];
+						dir[0] = ndir;
 						cout<<"PLAYER1:";
 						string in;
 						cin>>in;
 						cout<<endl;
 						Coord t = make_pair(in.at(0)-'0',in.at(1)-'0');
 						if (t != p1temp){
+							cout<<"entered coord not matching"<<endl;
 							return RESULT_INVALID;
 						}
 						char third = toupper(in.at(2));
@@ -372,6 +374,7 @@ public:
 						}
 					}
 					jump = can_jump(p1temp,ndir,index);
+					cout<<"new direction: "<<ndir<<endl;
 				}
 				if (check_win()) {
 					cout << "PLAYER 1 WINS" << endl;
@@ -393,7 +396,7 @@ public:
                                         }
                                 }
 				int mv = can_move(d, direction, index);
-				if (mv == -1000){
+				if (mv == -1000 || mv == 0){
 					return RESULT_INVALID; //invalid move;
 				}
 				int jump = can_jump(d, direction, index);
@@ -453,7 +456,7 @@ public:
 							dir.push_back("TR");
 						}
 					}
-					string ndir = "GL";
+					string ndir = "GJ";
 					if (cnt>=1){
 						ndir = dir[0];
 						cout<<"PLAYER2:";
@@ -478,6 +481,7 @@ public:
 						}
 					}
 					jump = can_jump(p2temp,ndir,index);
+					cout<<"new direction" << ndir<<endl;
                                 }
 				if (check_win()) {
 					cout << "PLAYER 2 WINS" << endl;
