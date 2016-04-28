@@ -278,6 +278,55 @@ public:
 					if (oindex > -1) {
 						p2pieces[oindex].jumped();
 					}
+					//check for additional jumps
+					int cnt = 0;
+					vector<String> dir;
+					Coord p1temp = p1pieces[index].get_coord();
+					if (can_jump(p1temp, "TL", index){
+						cnt++;
+						dir.push_back("TL");
+					}
+					if (can_jump(p1temp, "TR", index){
+						cnt++;
+						dir.push_back("TR");
+					}
+					if (p1pieces[index].checkKing()){
+						if (can_jump(p1temp, "BL", index){
+							cnt++;
+							dir.push_back("BL");
+						}
+						if (can_jump(p1temp, "BR", index){
+							cnt++;
+							dir.push_back("BR");
+						}
+					}
+					String newdir;
+					if (cnt>=1){
+						newdir = dir[0];
+					}
+					if (cnt>1){
+						cout<<"Multiple Jumps Available, enter jump:(XYSS) "<<endl;
+						String in;
+						cin>>in;
+						cout<<endl;
+						Coord t = make_pair(in.at(0)-'0',in.at(1)-'0');
+						if (t != p1temp){
+							return RESULT_INVALID;
+						}
+						char third = toupper(in.at(2));
+						char fourth = toupper(in.at(3));
+						String newdir = {third, fourth};
+						bool check = false;
+						for (vector<String>::iterator it = newdir.begin(); it != newdir.end(); it++){
+							if (newdir.compare((*it))){
+								check = true;
+							}
+						}
+						if (check != true){
+							return RESULT_INVALID;
+						}
+					}
+					jump = can_jump(p1temp,newdir,index);
 				}
 				if (check_win()) {
 					return RESULT_PLAYER1_WINS;
