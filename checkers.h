@@ -449,7 +449,12 @@ public:
 
 	void printp() {
 		typedef vector<CPiece>::iterator iterator;
+		cout<<"p1 pieces"<<endl;
 		for (iterator it = p1pieces.begin(); it != p1pieces.end(); it++) {
+			it->print();
+		}
+		cout<<"p2 pieces"<<endl;
+		for (iterator it = p2pieces.begin(); it != p2pieces.end(); it++){
 			it->print();
 		}
 	}
