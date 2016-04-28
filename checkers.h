@@ -109,7 +109,7 @@ public:
 						return -1000;
 					}
 					if (check_coord(d,0) > -1){
-						return -11;
+						return -1000;
 					}
 					if (check_coord(d,1) > -1){
 						return -1;
@@ -121,7 +121,7 @@ public:
 						return -1000;
 					}
 					if (check_coord(d,0) > -1){
-						return -22;
+						return -1000;
 					}
 					if (check_coord(d,1) > -1){
 						return -2;
@@ -136,7 +136,7 @@ public:
 							return -1000;
 						}
 						if (check_coord(d,0) > -1){
-                                                	return -33;
+                                                	return -1000;
 						}
 						if (check_coord(d,1) > -1){
 							return -3;
@@ -148,7 +148,7 @@ public:
 							return -1000;
 						}
 						if (check_coord(d,0) > -1){
-							return -44;
+							return -1000;
 						}
 						if (check_coord(d,1) > -1){
 							return -4;
@@ -158,7 +158,7 @@ public:
                                 }
                         }
 		}
-		return 0;
+		return -1000;
 	}
 	//can jump
 	int can_jump(Coord d, string direction, int index) {
@@ -323,7 +323,7 @@ public:
 						d.second+=2;
 					}
 					if (oindex > -1) {
-						cout<<"p2 get jumped brah"<<endl;
+						cout<<"p2 jumped"<<endl;
 						p2pieces[oindex].jumped();
 					}
 					//check for additional jumps
@@ -380,7 +380,9 @@ public:
 				if (check_win()) {
 					return RESULT_PLAYER1_WINS;
 				}
-			}else return RESULT_INVALID;
+			}else{
+				return RESULT_INVALID;
+			}
 		} else while (turn == true) { //p2piece
 			int index = check_coord(d, 1);
 			if (index >= 0) {
@@ -484,7 +486,9 @@ public:
 				if (check_win()) {
 					return RESULT_PLAYER2_WINS;
 				}
-			}else return RESULT_INVALID;
+			}else{
+				return RESULT_INVALID;
+			}
 		}
 		return RESULT_KEEP_PLAYING;
 	}
