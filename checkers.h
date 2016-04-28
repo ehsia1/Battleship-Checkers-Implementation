@@ -329,7 +329,6 @@ public:
 					int cnt = 0;
 					vector<string> dir;
 					Coord p1temp = p1pieces[index].get_coord();
-					cout<<"player 1 coord aftet jump "<< p1temp.first << p1temp.second << endl;
 					if (can_jump(p1temp, "TL", index)){
 						cnt++;
 						dir.push_back("TL");
@@ -357,7 +356,6 @@ public:
 						cout<<endl;
 						Coord t = make_pair(in.at(0)-'0',in.at(1)-'0');
 						if (t != p1temp){
-							cout<<"entered coord not matching"<<endl;
 							return RESULT_INVALID;
 						}
 						char third = toupper(in.at(2));
@@ -365,7 +363,7 @@ public:
 						string ndir = {third, fourth};
 						bool check = false;
 						for (vector<string>::iterator it = dir.begin(); it != dir.end(); it++){
-							if (ndir.compare((*it))){
+							if (ndir.compare((*it)) == 0){
 								check = true;
 							}
 						}
@@ -374,7 +372,6 @@ public:
 						}
 					}
 					jump = can_jump(p1temp,ndir,index);
-					cout<<"new direction: "<<ndir<<endl;
 				}
 				if (check_win()) {
 					cout << "PLAYER 1 WINS" << endl;
@@ -389,9 +386,7 @@ public:
 			int index = check_coord(d, 1);
 			if (index >= 0) {
 				if (is_jump()){
-					//cout<<"should force jump"<<endl;
                                         if (can_jump(d, direction, index) == 0){
-					//	cout<<"bad coordinate/piece"<<endl;
                                                 return RESULT_INVALID;
                                         }
                                 }
@@ -458,7 +453,7 @@ public:
 					}
 					string ndir = "GJ";
 					if (cnt>=1){
-						ndir = dir[0];
+						dir[0] = ndir;
 						cout<<"PLAYER2:";
 						string in;
 						cin>>in;
@@ -472,7 +467,7 @@ public:
 						string ndir = {third, fourth};
 						bool check = false;
 						for (vector<string>::iterator it = dir.begin(); it != dir.end(); it++){
-							if (ndir.compare((*it))){
+							if (ndir.compare((*it)) == 0){
 								check = true;
 							}
 						}
@@ -481,7 +476,6 @@ public:
 						}
 					}
 					jump = can_jump(p2temp,ndir,index);
-					cout<<"new direction" << ndir<<endl;
                                 }
 				if (check_win()) {
 					cout << "PLAYER 2 WINS" << endl;
