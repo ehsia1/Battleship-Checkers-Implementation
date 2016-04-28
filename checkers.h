@@ -292,20 +292,17 @@ public:
 					return RESULT_INVALID;//invalid move;
 				}
 				int jump = can_jump(d, direction, index);
+				bool crowned = true;
 				if (mv > 0) { //move it
 					if (p1pieces[index].move(mv,1)==1){
 						p1pieces[index].makeKing();
-						toggle();
-						return RESULT_KEEP_PLAYING;
 					}
-					toggle();
 				}
-				else while (jump > 0) { //jump it
+				else while (jump > 0 && crowned) { //jump it
 					int oindex = -1;
 					if (p1pieces[index].move(jump,2)==1){
 						p1pieces[index].makeKing();
-						toggle();
-						return RESULT_KEEP_PLAYING;
+						crowned = false;
 					}
 
 					if (jump == 1) { //tl
@@ -342,7 +339,7 @@ public:
 							dir.push_back("BR");
 						}
 					}
-					string ndir;
+					string ndir = "GL";
 					if (cnt>=1){
 						ndir = dir[0];
 					}
@@ -370,6 +367,7 @@ public:
 					}
 					jump = can_jump(p1temp,ndir,index);
 				}
+				toggle();
 				if (check_win()) {
 					return RESULT_PLAYER1_WINS;
 				}
@@ -378,9 +376,9 @@ public:
 			int index = check_coord(d, 1);
 			if (index >= 0) {
 				if (is_jump()){
-					cout<<"should force jump"<<endl;
+					//cout<<"should force jump"<<endl;
                                         if (can_jump(d, direction, index) == 0){
-						cout<<"bad coordinate/piece"<<endl;
+					//	cout<<"bad coordinate/piece"<<endl;
                                                 return RESULT_INVALID;
                                         }
                                 }
@@ -389,20 +387,18 @@ public:
 					return RESULT_INVALID; //invalid move;
 				}
 				int jump = can_jump(d, direction, index);
+				bool crowned = true;
 			        if (mv > 0) { //move it
 					if (p2pieces[index].move(mv/10,1)==2){
 						p2pieces[index].makeKing();
-						toggle();
-						return RESULT_KEEP_PLAYING;
+						crowned = false;
 					}
-					toggle();
                                 }
-				else while (jump < 0) { //jump it
+				else while (jump < 0 && crowned) { //jump it
                                         int oindex = -1;
 					if (p2pieces[index].move(jump*-1,2)==2){
 						p2pieces[index].makeKing();
-						toggle();
-						return RESULT_KEEP_PLAYING;
+						crowned = false;
 					}
 
                                         if (jump == -1) { //tl
@@ -467,6 +463,7 @@ public:
 					}
 					jump = can_jump(p2temp,ndir,index);
                                 }
+				toggle();
 				if (check_win()) {
 					return RESULT_PLAYER2_WINS;
 				}
