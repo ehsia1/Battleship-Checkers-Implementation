@@ -323,7 +323,6 @@ public:
 						d.second+=2;
 					}
 					if (oindex > -1) {
-						cout<<"p2 jumped"<<endl;
 						p2pieces[oindex].jumped();
 					}
 					//check for additional jumps
@@ -351,7 +350,7 @@ public:
 					string ndir = "GL";
 					if (cnt>=1){
 						ndir = dir[0];
-						cout<<"Player1:"<<endl;
+						cout<<"PLAYER1:";
 						string in;
 						cin>>in;
 						cout<<endl;
@@ -455,7 +454,7 @@ public:
 					string ndir = "GL";
 					if (cnt>=1){
 						ndir = dir[0];
-						cout<<"Player 2:"<<endl;
+						cout<<"PLAYER2:";
 						string in;
 						cin>>in;
 						cout<<endl;
