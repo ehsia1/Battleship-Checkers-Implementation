@@ -373,9 +373,11 @@ public:
 					}
 					jump = can_jump(p1temp,ndir,index);
 				}
-				toggle();
 				if (check_win()) {
+					cout << "PLAYER 1 WINS" << endl;
 					return RESULT_PLAYER1_WINS;
+				} else {
+					toggle();
 				}
 			}else{
 				return RESULT_INVALID;
@@ -477,9 +479,11 @@ public:
 					}
 					jump = can_jump(p2temp,ndir,index);
                                 }
-				toggle();
 				if (check_win()) {
+					cout << "PLAYER 2 WINS" << endl;
 					return RESULT_PLAYER2_WINS;
+				} else {
+					toggle();
 				}
 			}else{
 				return RESULT_INVALID;
@@ -491,13 +495,13 @@ public:
 	bool check_win() {
 		typedef vector<CPiece>::iterator iterator;
 		int counter = 0;
-		if (turn == true) {
+		if (turn == false) {
 			for (iterator it = p2pieces.begin(); it != p2pieces.end(); it++) {
 				if (it->check_jumped() == -1) {
 					counter++;
 				}
 			}
-		} else if (turn == false) {
+		} else if (turn == true) {
 			for (iterator it = p1pieces.begin(); it != p1pieces.end(); it++) {
 				if (it->check_jumped() == -1) {
 					counter++;
