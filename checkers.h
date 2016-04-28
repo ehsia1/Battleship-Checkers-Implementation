@@ -246,6 +246,12 @@ public:
 		return 0;
 	}
 
+	/*bool is_jump(){
+		typedef vector<Coord, int>::iterator iterator;
+		if (turn == false){
+			for (iterator it = p1pieces.begin(); it != p1pieces.end(); it++){
+				if (can_jump !=0){
+*/
 	//attack square (move)
 	GameResult attack_square(Coord d, string direction) {
 		if (turn == false) { //p1piece
@@ -262,7 +268,7 @@ public:
 					}
 					toggle();
 				}
-				else if (jump != 0) { //jump it
+				else while (jump > 0) { //jump it
 					int oindex = -1;
 					if (p1pieces[index].move(jump,2)==1){
 						p1pieces[index].makeKing();
@@ -345,13 +351,17 @@ public:
 			        if (mv > 0) { //move it
 					if (p2pieces[index].move(mv/10,1)==2){
 						p2pieces[index].makeKing();
+						toggle();
+						return RESULT_KEEP_PLAYING;
 					}
 					toggle();
                                 }
-				else while (jump != 0) { //jump it
+				else while (jump < 0) { //jump it
                                         int oindex = -1;
 					if (p2pieces[index].move(jump*-1,2)==2){
 						p2pieces[index].makeKing();
+						toggle();
+						return RESULT_KEEP_PLAYING;
 					}
 
                                         if (jump == -1) { //tl
