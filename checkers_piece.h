@@ -4,6 +4,7 @@
 #include "piece.h"
 #include "game.h"
 #include <map>
+#include <iostream>
 
 using namespace std;
 
@@ -31,6 +32,10 @@ public:
 
 	int check_jumped(){
 		return loc.second;
+	}
+
+	Coord get_coord(){
+		return loc.first;
 	}
 
 	void jumped(){
