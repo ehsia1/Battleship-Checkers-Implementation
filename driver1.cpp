@@ -344,7 +344,7 @@ int main() {
 					if (ckgame.attack_square(d, direction) == RESULT_PLAYER1_WINS) {
 						count1++;
 					}
-					ckgame.printp();
+					//ckgame.printp(); prints out player 1 pieces - used during testing and OVERRIDES << operater
 				} else {
 					cout << "PLAYER 2:";
 					cin >> input;
@@ -362,7 +362,7 @@ int main() {
                                         if (ckgame.attack_square(d, direction) == RESULT_PLAYER2_WINS) {
                                                 count1++;
                                         }
-					ckgame.printp();
+					//ckgame.printp(); prints out player 2 pieces - used during testing and OVERRIDES << operator
 				}
 			}
 			break;
