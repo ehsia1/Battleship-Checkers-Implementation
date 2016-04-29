@@ -286,6 +286,8 @@ using namespace std;
 					return RESULT_INVALID;//invalid move;
 				}
 				int jump = can_jump(d, direction, index);
+				int wasking = 0;
+				bool crowned = false;
 				if (mv > 0) { //move it
 					if (p1pieces[index].move(mv,1)==1){ //if player is eligible for crowning
 						p1pieces[index].makeKing();
@@ -294,12 +296,10 @@ using namespace std;
 				}
 				else if (jump > 0) { //jump it
 					int oindex = -1; //used later for knowing which opponents piece to be jumped
-					bool crowned = false; //used for JUMPED message suppresion later
+					crowned = false; //used for JUMPED message suppresion later
 					if (p1pieces[index].move(jump,2)==1){ //piece that is jumping has it coordinates updated in piece.move function
+						wasking = p1pieces[index].checkKing();
 						p1pieces[index].makeKing();
-						if (!check_win()){ //suppresses crowned message if game is won
-							cout<<"CROWNED"<<endl;
-						}
 						crowned = true;
 					}
 
@@ -318,6 +318,7 @@ using namespace std;
 							cout<<"JUMPED"<<endl;
 						}
 					}
+
 					//check for additional jumps
 					int cnt = 0; //tracks number of available jumps
 					Coord p1temp = p1pieces[index].get_coord();
@@ -335,7 +336,18 @@ using namespace std;
 							cnt++;
 						}
 					}
-					if (cnt>=1){
+					string input;
+					if (cnt>=1 && !crowned){
+						cout << "PLAYER 1:";
+						cin >> input;
+						Coord a = make_pair(input.at(0) - '0', input.at(1) - '0');
+						char third = toupper(input.at(2));
+						char fourth = toupper(input.at(3));
+						string dir = {third, fourth};
+						if (a != p1temp) {
+							return RESULT_INVALID;
+						}
+						attack_square(p1temp, dir);
 						return RESULT_KEEP_PLAYING; //if more jumps available, main will repromt user because turn was not changed by toggle()
 					}
 				}
@@ -343,6 +355,9 @@ using namespace std;
 					cout << "PLAYER 1 WINS" << endl;
 					return RESULT_PLAYER1_WINS;
 				} else {
+					if (wasking == 0 && crowned){
+						cout<<"CROWNED"<<endl;
+					}
 					toggle(); //change turn
 				}
 			}else{
@@ -361,6 +376,8 @@ using namespace std;
 					return RESULT_INVALID; //invalid move;
 				}
 				int jump = can_jump(d, direction, index);
+				int wasking = 0;
+				bool crowned = false;
 			        if (mv > 0) { //move it
 					if (p2pieces[index].move(mv/10,1)==2){
 						p2pieces[index].makeKing();
@@ -369,12 +386,10 @@ using namespace std;
                                 }
 				else if(jump < 0) { //jump it
                                         int oindex = -1;
-					bool crowned = false;
+					crowned = false;
 					if (p2pieces[index].move(jump*-1,2)==2){
+						wasking = p2pieces[index].checkKing();
 						p2pieces[index].makeKing();
-						if (!check_win()){
-							cout<<"CROWNED"<<endl;
-						}
 						crowned = true;
 					}
 
@@ -410,7 +425,18 @@ using namespace std;
 							cnt++;
 						}
 					}
-					if (cnt>=1){
+					string input;
+					if (cnt>=1 && !crowned){
+						cout << "PLAYER 2:";
+                                                cin >> input;
+                                                Coord a = make_pair(input.at(0) - '0', input.at(1) - '0');
+                                                char third = toupper(input.at(2));
+                                                char fourth = toupper(input.at(3));
+                                                string dir = {third, fourth};
+                                                if (a != p2temp) {
+                                                        return RESULT_INVALID;
+                                                }
+                                                attack_square(p2temp, dir);
 						return RESULT_KEEP_PLAYING;
 					}
                                 }
@@ -418,6 +444,9 @@ using namespace std;
 					cout << "PLAYER 2 WINS" << endl;
 					return RESULT_PLAYER2_WINS;
 				} else {
+					if (wasking == 0 && crowned){
+						cout<<"CROWNED"<<endl;
+					}
 					toggle();
 				}
 			}else{
