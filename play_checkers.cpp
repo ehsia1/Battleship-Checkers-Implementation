@@ -44,10 +44,67 @@ void game1() {
         assert(result == RESULT_KEEP_PLAYING); //p2 turn
 	result = ckgame.attack_square(make_pair(0, 5), "TR");
         assert(result == RESULT_KEEP_PLAYING); //p1 turn; double jumps p2 pieces cause he's a boss
-	result = ckgame.attack_square(make_pair(2, 3), "TR");
-	assert(result == RESULT_KEEP_PLAYING); //p1 turn; double jump
+	/*result = ckgame.attack_square(make_pair(2, 3), "TR");
+	assert(result == RESULT_KEEP_PLAYING); //p1 turn; double jump*/
 	result = ckgame.attack_square(make_pair(5, 0), "BL");
         assert(result == RESULT_KEEP_PLAYING); //p2 turn
+
+	result = ckgame.attack_square(make_pair(1, 6), "TL");
+        assert(result == RESULT_KEEP_PLAYING); //p1 turn
+	result = ckgame.attack_square(make_pair(4, 3), "BL");
+        assert(result == RESULT_KEEP_PLAYING); //p2 turn
+	result = ckgame.attack_square(make_pair(4, 5), "TL");
+        assert(result == RESULT_KEEP_PLAYING); //p1 turn first jump
+	result = ckgame.attack_square(make_pair(2, 1), "BL");
+        assert(result == RESULT_KEEP_PLAYING); //p2 turn
+	result = ckgame.attack_square(make_pair(3, 6), "TL");
+        assert(result == RESULT_KEEP_PLAYING); //p1 turn
+	result = ckgame.attack_square(make_pair(5, 2), "BL");
+        assert(result == RESULT_KEEP_PLAYING); //p2 turn
+	result = ckgame.attack_square(make_pair(2, 7), "TR");
+        assert(result == RESULT_KEEP_PLAYING); //p1 turn
+	result = ckgame.attack_square(make_pair(3, 0), "BR");
+        assert(result == RESULT_KEEP_PLAYING); //p2 turn
+	result = ckgame.attack_square(make_pair(0, 7), "TR");
+        assert(result == RESULT_KEEP_PLAYING); //p1 turn
+	result = ckgame.attack_square(make_pair(4, 3), "BL");
+        assert(result == RESULT_KEEP_PLAYING); //p2 turn
+	result = ckgame.attack_square(make_pair(2, 5), "TR");
+        assert(result == RESULT_KEEP_PLAYING); //p1 turn
+	result = ckgame.attack_square(make_pair(5, 2), "BL");
+        assert(result == RESULT_KEEP_PLAYING); //p2 turn
+	result = ckgame.attack_square(make_pair(6, 5), "TL");
+        assert(result == RESULT_KEEP_PLAYING); //p1 turn
+	result = ckgame.attack_square(make_pair(7, 2), "BL");
+        assert(result == RESULT_KEEP_PLAYING); //p2 turn
+	result = ckgame.attack_square(make_pair(5, 4), "TR");
+        assert(result == RESULT_KEEP_PLAYING); //p1 turn
+	//player 1 piece crowned now
+	result = ckgame.attack_square(make_pair(7, 0), "BL");
+        assert(result == RESULT_KEEP_PLAYING); //p2 turn
+	result = ckgame.attack_square(make_pair(5, 0), "BR");
+        assert(result == RESULT_KEEP_PLAYING); //p1 turn
+	result = ckgame.attack_square(make_pair(3, 4), "BL");
+        assert(result == RESULT_KEEP_PLAYING); //p2 turn
+	result = ckgame.attack_square(make_pair(1, 6), "TR");
+        assert(result == RESULT_KEEP_PLAYING); //p1 turn jump
+	result = ckgame.attack_square(make_pair(1, 0), "BR");
+        assert(result == RESULT_KEEP_PLAYING); //p2 turn
+	result = ckgame.attack_square(make_pair(7, 2), "TL");
+        assert(result == RESULT_KEEP_PLAYING); //p1 turn
+	result = ckgame.attack_square(make_pair(1, 2), "BR");
+        assert(result == RESULT_KEEP_PLAYING); //p2 turn
+	result = ckgame.attack_square(make_pair(3, 4), "TL");
+        assert(result == RESULT_KEEP_PLAYING); //p1 turn
+
+
+
+
+/*
+
+
+
+
 	result = ckgame.attack_square(make_pair(-4, 9), "BR");
         assert(result == RESULT_INVALID); //p1 turn; invalid off the board
 	result = ckgame.attack_square(make_pair(6, 5), "TL");
@@ -115,7 +172,7 @@ void game1() {
 	result = ckgame.attack_square(make_pair(5, 2), "BL");
         assert(result == RESULT_KEEP_PLAYING); //p2 turn
 	result = ckgame.attack_square(make_pair(5, 4), "TL");
-        assert(result == RESULT_PLAYER1_WINS); //p1 turn
+        assert(result == RESULT_PLAYER1_WINS); //p1 turn */
 }
 int main() {
 	game1();

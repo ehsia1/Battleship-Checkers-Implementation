@@ -7,7 +7,31 @@
 #include "checkers.h"
 using namespace std;
 
-	CheckersGame::CheckersGame(): Game(), p1pieces(), p2pieces() {} //constructor for checkers game
+	CheckersGame::CheckersGame(): Game(), p1pieces(), p2pieces() {
+        Coord c = make_pair(1,0);
+        for (int i = 0; i < 12; i++) {
+                if (i == 4) {
+                        c = make_pair(0,1); //follows the rules for setting board for player 2 pieces
+                } else if (i == 8) {
+                        c = make_pair(1,2);
+                }
+                CPiece temp(c);
+                p2pieces.push_back(temp);
+                c = make_pair(c.first + 2, c.second);
+        }
+
+        Coord d = make_pair(0,5);
+        for (int i = 0; i < 12; i++) {
+                if (i == 4) {
+                        d = make_pair(1,6); //follows the rules for setting board for player 1 pieces
+                } else if (i == 8) {
+                        d = make_pair(0,7);
+                }
+                CPiece temp(d);
+                p1pieces.push_back(temp);
+                d = make_pair(d.first + 2, d.second);
+        }
+	} //constructor for checkers game
 
 	int CheckersGame::check_coord(Coord c, int whosePiece) { //check to see if piece is there
 		int counter = 0;
@@ -337,7 +361,7 @@ using namespace std;
 						}
 					}
 					string input;
-					if (cnt>=1 && !crowned){
+					if (cnt>=1 && (!crowned || wasking==1)){
 						cout << "PLAYER 1:";
 						cin >> input;
 						Coord a = make_pair(input.at(0) - '0', input.at(1) - '0');
@@ -426,7 +450,7 @@ using namespace std;
 						}
 					}
 					string input;
-					if (cnt>=1 && !crowned){
+					if (cnt>=1 && (!crowned || wasking==1)){
 						cout << "PLAYER 2:";
                                                 cin >> input;
                                                 Coord a = make_pair(input.at(0) - '0', input.at(1) - '0');
