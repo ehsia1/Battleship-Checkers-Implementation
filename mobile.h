@@ -22,7 +22,7 @@ using namespace std;
 
 class Mobile: public BattleshipGame {
 public:
-	Mobile();
+	Mobile(); //constructor 
 
 	bool move(Coord c, int num, char dir); //moves ship
 };
