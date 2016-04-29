@@ -2,6 +2,8 @@
 #include "battleship.h"
 #include "mobile.h"
 #include "checkers.h"
+
+
 using namespace std;
 
 ostream& operator<<(ostream& os, vector<Ship> fleet) {

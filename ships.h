@@ -9,192 +9,32 @@ using namespace std;
 class Ship: public Piece {
 public:
 
-	Ship(int num, Coord c, char direction) {
+	Ship(int num, Coord c, char direction); //constructor
 
-		direction = toupper(direction);
-		length = num;
-		if ((c.first > 9) || (c.first<0) || (c.second > 9) || (c.second<0)) {
-			cout << "Off the board!" << endl;
-		} else if (direction == 'V') {
-			if (num+c.second < 10) {
-				lgbtq = direction;
-				for (int i=0;i<num;i++) {
-					Coord temp = make_pair(c.first, c.second+i);
-					location[temp] = 0;
-				}
-			} else {
-				cout << "Off the board!" << endl;
-			}
-		} else if (direction == 'H') {
-			if (num+c.first < 10) {
-				lgbtq = direction;
-				for (int i=0;i<num;i++) {
-					Coord temp = make_pair(c.first+i, c.second);
-					location[temp] = 0;
-				}
-			} else {
-				cout << "Off the board!" << endl;
-			}
-		}
-	}
-	int is_sunk() {
-		typedef map<Coord, int>::iterator iterator;
-		int counter1=0;
-		int counter2=0;
-		for (iterator it = location.begin(); it != location.end(); it++) {
-			counter1++;
-			if (it->second >= 1) {
-				counter2++;
-			}
-		}
-		if (counter1==counter2) {
-			return 1; //is sunk
-		}
-		return 0;
-	}
+	int is_sunk(); //checks if the ship is sunk
 
-	int has_coord(Coord c) {
-		int counter = 0;
-		typedef map<Coord, int>::iterator iterator;
-		for (iterator it = location.begin(); it != location.end(); it++) {
-			if(it->first == c){
-				return counter;
-			}
-			counter++;
-		}
-		return -1;
+	int has_coord(Coord c); //see if ship has a given coordinate
 
-	}
+	void hit(int h); //checks if hit or not
 
-	void hit(int h){
-		typedef map<Coord, int>::iterator iterator;
-		int counter = 0;
-		for (iterator it = location.begin(); it != location.end(); it++){
-			if(counter == h){
-				location[it->first]++;
-			}
-			counter++;
-		}
-	}
+	bool shift(int num, char dir); //shifts the ship based on given direction and length of shifting
 
-	bool shift(int num, char dir){
-		map<Coord, int> temploc;
-		typedef map<Coord, int>::iterator iterator;
-		typedef map<Coord, int>::reverse_iterator r_iterator;
-		if (num <= 0){
-			return false;
-		}
-		if (dir=='D'){
-			if (lgbtq == 'H'){
-				return false;
-			}
-			if (location.rbegin()->first.second + num >9){
-				return false;
-			}
-			for (r_iterator rit = location.rbegin(); rit!= location.rend(); rit++){
-				Coord temp = rit->first;
-				temp.second += num;
-				temploc[temp] = rit->second;
-			}
-			get_rid();
-			update(temploc);
-			return true;
-		}
-		if (dir=='U'){
-			if (lgbtq == 'H'){
-				return false;
-			}
-			if (location.begin()->first.second - num <0){
-				return false;
-			}
-			for (iterator it = location.begin(); it!= location.end(); it++){
-				Coord temp = it->first;
-				temp.second -= num;
-				temploc[temp] = it->second;
-			}
-			get_rid();
-			update(temploc);
-			return true;
-		}
-		if (dir=='R'){
-			if (lgbtq == 'V'){
-				return false;
-			}
-			if (location.rbegin()->first.first + num >9){
-				return false;
-			}
-			for (r_iterator rit = location.rbegin(); rit!=location.rend(); rit++){
-				Coord temp = rit->first;
-				temp.first += num;
-				temploc[temp] = rit->second;
-			}
-			get_rid();
-			update(temploc);
-			return true;
-		}
-		if (dir=='L'){
-			if (lgbtq == 'V'){
-				return false;
-			}
-			if (location.begin()->first.first - num <0){
-				return false;
-			}
-			for (iterator it = location.begin(); it!=location.end(); it++){
-				Coord temp = it->first;
-				temp.first -= num;
-				temploc[temp] = it->second;
-			}
-			get_rid();
-			update(temploc);
-			return true;
-		}
-		return false;
-	}
+	char get_dir(); //returns instance variable (direction)
 
-	char get_dir(){
-		return lgbtq;
-	}
+	void set_name(string s); //sets the name of the ship
 
-	void set_name(string s){
-		name = s;
-	}
+	string get_name(); //return the name (because it is private)
 
-	string get_name(){
-		return name;
-	}
+	int get_length(); //returns length of ship (because it is private)
 
-	int get_length(){
-		return length;
-	}
-
-	void sink(){
-		typedef map<Coord, int>::iterator iterator;
-		for (iterator it = location.begin(); it != location.end(); it++){
-			Coord temp = it->first;
-                        temp.first = -1;
-			temp.second = -1;
-                        location[temp] = it->second;
-                        location.erase(it->first);
-		}
-	}
-
+	void sink(); //makes ship go off board if it is sunk
 
 	map<Coord, int> location;
 
 private:
-	void get_rid(){
-		typedef map<Coord, int>::iterator iterator;
-		for (iterator it = location.begin(); it != location.end(); it++){
-			location.erase(it->first);
-		}
-	}
+	void get_rid(); //erases/deletes old spots of ship post shifting
 
-	void update(map<Coord, int> temploc){
-		typedef map<Coord, int>::iterator iterator;
-		for (iterator it = temploc.begin(); it != temploc.end(); it++){
-			location[it->first] = it->second;
-		}
-	}
+	void update(map<Coord, int> temploc); //places ship in new spot on board
 
 	string name;
 	char lgbtq; //orientation of ship on board (vertical (V) or horizontal (H)

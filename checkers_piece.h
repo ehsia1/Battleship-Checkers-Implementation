@@ -10,68 +10,23 @@ using namespace std;
 
 class CPiece: public Piece {
 public:
-	CPiece(Coord c) {
-		loc.first = c;
-		loc.second = 0; //0 if not king
-	}
+	CPiece(Coord c); //constructor
 
-	int checkKing() {
-		return loc.second;
-	}
+	int checkKing(); //check if a piece is a king
 
-	void makeKing() {
-		loc.second = 1;
-	}
+	void makeKing(); //change the int
 
-	int has_coord(Coord c) {
-		if (loc.first == c) {
-			return 1;
-		}
-		return 0;
-	}
+	int has_coord(Coord c); //check if spot has coord given
 
-	int check_jumped(){
-		return loc.second;
-	}
+	int check_jumped(); //see if piece was jumped
 
-	Coord get_coord(){
-		return loc.first;
-	}
+	Coord get_coord(); //return coordinate
 
-	void jumped(){
-		loc.first.first = -1;
-		loc.first.second = -1;
-		loc.second = -1;
-	}
+	void jumped(); //place off the board
 
-	int move(int dir, int num){
-		if (dir == 1) { // tl
-			loc.first.first-=num;
-			loc.first.second-=num;
-		} else  if (dir == 2) { // tr
-			loc.first.first+=num;
-			loc.first.second-=num;
-		} else if (dir == 3) { // bl
-			loc.first.first-=num;
-			loc.first.second+=num;
-		} else if (dir == 4) { // br
-			loc.first.first+=num;
-			loc.first.second+=num;
-		}
+	int move(int dir, int num); //move the piece
 
-		if (loc.first.second==0){
-			return 1;
-		}
-		if (loc.first.second==7){
-			return 2;
-		}
-		return 0;
-
-	}
-
-	void print() {
-		cout << "(" << loc.first.first << ", " << loc.first.second << ") king:"<< loc.second << endl;
-	}
+	void print();
 private:
 	pair<Coord, int> loc;
 
