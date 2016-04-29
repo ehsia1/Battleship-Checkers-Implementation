@@ -18,7 +18,6 @@ final project*/
 #include <cctype>
 #include "ships.h"
 #include "battleship.h"
-using namespace std;
 
 class Mobile: public BattleshipGame {
 public:

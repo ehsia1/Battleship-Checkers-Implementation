@@ -4,7 +4,6 @@
 #include <map>
 #include "game.h"
 #include "piece.h"
-using namespace std;
 
 class Ship: public Piece {
 public:
@@ -21,22 +20,22 @@ public:
 
 	char get_dir(); //returns instance variable (direction)
 
-	void set_name(string s); //sets the name of the ship
+	void set_name(std::string s); //sets the name of the ship
 
-	string get_name(); //return the name (because it is private)
+	std::string get_name(); //return the name (because it is private)
 
 	int get_length(); //returns length of ship (because it is private)
 
 	void sink(); //makes ship go off board if it is sunk
 
-	map<Coord, int> location;
+	std::map<Coord, int> location;
 
 private:
 	void get_rid(); //erases/deletes old spots of ship post shifting
 
-	void update(map<Coord, int> temploc); //places ship in new spot on board
+	void update(std::map<Coord, int> temploc); //places ship in new spot on board
 
-	string name;
+	std::string name;
 	char lgbtq; //orientation of ship on board (vertical (V) or horizontal (H)
 	int length;
 };
