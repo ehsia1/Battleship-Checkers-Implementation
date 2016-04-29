@@ -6,8 +6,6 @@
 #include <map>
 #include <iostream>
 
-using namespace std;
-
 class CPiece: public Piece {
 public:
 	CPiece(Coord c); //constructor
@@ -28,7 +26,7 @@ public:
 
 	void print();
 private:
-	pair<Coord, int> loc;
+	std::pair<Coord, int> loc;
 
 };
 #endif

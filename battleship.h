@@ -11,7 +11,6 @@
 #include <map>
 #include "ships.h"
 
-using namespace std;
 //typedef array<Coord, int> ship;
 
 class BattleshipGame: public Game {
@@ -25,8 +24,8 @@ public:
 
 	bool check_win(); //check if game was won
 
-	vector<Ship> fleet1; //vector of player 1's ships
-	vector<Ship> fleet2;// ^^^ for player2
+	std::vector<Ship> fleet1; //vector of player 1's ships
+	std::vector<Ship> fleet2;// ^^^ for player2
 };
 
 class  BattleshipBoard: public Board {
