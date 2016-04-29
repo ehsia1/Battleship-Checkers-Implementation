@@ -44,7 +44,7 @@ public:
 	Game(): turn(false) {
 	}
 
-	void toggle() {
+	void toggle() { //changes the turn
 		turn = !turn;
 	}
 

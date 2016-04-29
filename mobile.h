@@ -22,83 +22,9 @@ using namespace std;
 
 class Mobile: public BattleshipGame {
 public:
-	Mobile(): BattleshipGame() {}
+	Mobile();
 
-	bool move(Coord c, int num, char dir){
-		if (num>3 || num<-3){
-			return false;
-		}
-		dir = toupper(dir);
-
-		if (turn==false){
-			int str = check_coord(c,0);
-			if (str<0){
-				return false;
-			}
-			for (int i=1; i<=num; i++){
-				if (dir == 'D'){
-					if (check_coord(make_pair(fleet1[str].location.rbegin()->first.first, fleet1[str].location.rbegin()->first.second+i),0) != -1 ){
-						return false;
-					}
-				}
-				else if (dir == 'U'){
-					if (check_coord(make_pair(fleet1[str].location.begin()->first.first, fleet1[str].location.begin()->first.second-i),0) !=-1){
-						return false;
-					}
-				}
-				else if (dir == 'R'){
-					if (check_coord(make_pair(fleet1[str].location.rbegin()->first.first+i, fleet1[str].location.rbegin()->first.second),0) != -1){
-						return false;
-					}
-				}
-				else if (dir == 'L'){
-					if (check_coord(make_pair(fleet1[str].location.begin()->first.first-i, fleet1[str].location.begin()->first.second),0) !=-1){
-						return false;
-					}
-				}
-			}
-			if(fleet1[str].shift(num, dir)){
-				toggle();
-				return true;
-			}
-			return false;
-		}
-		else if (turn==true){
-			int str = check_coord(c, 1);
-			if (str<0){
-				return false;
-			}
-			for (int i=1; i<=num; i++){
-                                if (dir == 'D'){
-                                        if (check_coord(make_pair(fleet2[str].location.rbegin()->first.first, fleet2[str].location.rbegin()->first.second+i),1) != -1){
-                                                return false;
-                                        }
-                                }
-                                else if (dir == 'U'){
-                                        if (check_coord(make_pair(fleet2[str].location.begin()->first.first, fleet2[str].location.begin()->first.second-i),1) != -1){
-                                                return false;
-                                        }
-                                }
-                                else if (dir == 'R'){
-                                        if (check_coord(make_pair(fleet2[str].location.rbegin()->first.first+i, fleet2[str].location.rbegin()->first.second),1) != -1){
-                                                return false;
-                                        }
-                                }
-                                else if (dir == 'L'){
-                                        if (check_coord(make_pair(fleet2[str].location.begin()->first.first-i, fleet2[str].location.begin()->first.second),1) != -1){
-                                                return false;
-                                        }
-                                }
-                        }
-
-			if(fleet2[str].shift(num, dir)){
-				toggle();
-				return true;
-			}
-			return false;
-		}
-		return false;
-	}
+	bool move(Coord c, int num, char dir); //moves ship
 };
 
 #endif
