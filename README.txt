@@ -7,6 +7,36 @@ Evan Hsia - ehsia1
 Willie Franceschi - wfrance2
 
 DESIGN:
+	Overall:
+        Battleships Game, Mobile BS, and Checkers are all games and inherit virtual functions
+        from game.h. Mobile BS is a Battleship Game, but with additional moving functionality.
+
+        For Battleship Game, there are 2 fleets (vector of Ships), one per player. Each fleet has 5 Ship objects,
+        which are created during the placement phase. Each player makes one move for their turn.
+        Invalid placements prompt the user to repeat the placement. The user proceeds to play
+        battleships, sinking ships and taking names until a player wins. Invalid coordinates
+        prompt the user to repeat an attack. The game tells notifies the user when a ship is sunk
+        or hit.
+        The check_coord function checks to see if a ships of a player's fleet contains a coordinate.
+
+        Most of the functionality is in attack_square, which makes calls to check_coord when
+        dictating hits and misses.
+
+        For Mobile Game, the user plays just like battleship, but instead of a shot, the user has
+        the option to move their ship. A move function in the Mobile game class checks to make
+        sure the move is valid (does not go off board, does not collide with a possibly more expensive
+        ship like an air craft carrier). The move function calls upon the shift function for the ship,
+        which updates the coordinates of the ship that shift was called upon.
+
+        For Checkers Game, the user plays checkers until a winner is established.
+        Thec check_coord function is used again to see if a player has a piece with the coordinate.
+        The can_move function uses the the check_coord function to determine the state of a spot on
+        the board (empty, player1 or player2 piece occupies) and returns different values corresponding
+        to not only the state of the spot, but also the direction that was tested.
+        The can_jump function is uses the can_move function to test the state of a spot, the return value
+        is indicative of whether jump can be performed in the user specified direction.
+        RECURSION is used in attack_square for the multiple jump functionality.
+
 	game.h --> contains the enum information (GameResult), typedef for the Coord used in battleship and mobile battleship
 	piece.h --> includes functions from game.h; has virtual functions (shift, has_coord) that are overriden in later classes 
 	ships.h --> IS-A-PIECE relationship; used to create Ship objects (each ship was made an object because each ship had unique properties, such as unique location on the 
