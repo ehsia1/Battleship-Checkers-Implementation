@@ -10,7 +10,19 @@ DESIGN:
 	game.h --> contains the enum information (GameResult), typedef for the Coord used in battleship and mobile battleship
 	piece.h --> includes functions from game.h; has virtual functions (shift, has_coord) that are overriden in later classes 
 	ships.h --> IS-A-PIECE relationship; used to create Ship objects (each ship was made an object because each ship had unique properties, such as unique location on the 
-		board and length. Also contained overarching functions that could be applied to all Ships (functions like  
+		board and length. Also contained overarching functions that could be applied to all Ships
+	checkers_piece.h --> IS-A-PIECE relationship; used to create CPiece objects (checkers pieces); each checkers piece can become a king or be jumped
+	battleship.h --> IS-A-GAME relationship, HAS-A-Ship; uesd to create BattleshipsGame objects; has functions and class definition for BattleshipGame
+	mobile.h --> IS-A-BattleshipsGame relationship, HAS-A-Ship; inherits all the functions for a battleship game but Mobile game also has extra moving functionality for moving ships
+	checkers.h --> IS-A-Game relationship, HAS-A-Cpiece; used to create CheckersGame object; has a lot of functions
+
+	.cpp files corresponding to .h files hold the function definitions and functionality
+
+	driver1.cpp --> allows the user to select which game, and then makes appropriate calls so user can play that game; executable - make driver1; ./driver1
+
+	play_bs.cpp --> tester file for battleship game; executable - make play_bs; ./play_bs
+	play_mbs.cpp --> tester file for mobile battleship game; executable - make play_mbs; ./play_mbs
+	play_checkers.cpp --> tester file for checkers game; executable - make play_checkers; ./play_checkers 
 
 
 REQUIRED LANGUAGE FEATURES:
