@@ -297,53 +297,42 @@ using namespace std;
 					bool crowned = false; //used for JUMPED message suppresion later
 					if (p1pieces[index].move(jump,2)==1){ //piece that is jumping has it coordinates updated in piece.move function
 						p1pieces[index].makeKing();
-						cout<<"CROWNED"<<endl;
+						if (!check_win()){ //suppresses crowned message if game is won
+							cout<<"CROWNED"<<endl;
+						}
 						crowned = true;
 					}
 
 					if (jump == 1) { //direction: TL
 						oindex = check_coord(make_pair(d.first-1,d.second-1),1); //if jump is possible, get vector index of opponents piece to be jumped
-						d.first-=2; //update
-						d.second-=2;
 					} else if (jump == 2) { //TR
 						oindex = check_coord(make_pair(d.first+1,d.second-1),1);
-						d.first+=2;
-						d.second-=2;
 					} else if (jump == 3) { //BL
 						oindex = check_coord(make_pair(d.first-1,d.second+1),1);
-						d.first-=2;
-						d.second+=2;
 					} else if (jump == 4) { //BR
 						oindex = check_coord(make_pair(d.first+1,d.second+1),1);
-						d.first+=2;
-						d.second+=2;
 					}
 					if (oindex > -1) {
 						p2pieces[oindex].jumped(); //update coordinate of jumped piece
-						if (!crowned){ //only print JUMPED if piece was no just crowned
+						if (!crowned){ //only print JUMPED if piece was not just crowned
 							cout<<"JUMPED"<<endl;
 						}
 					}
 					//check for additional jumps
 					int cnt = 0; //tracks number of available jumps
-					vector<string> dir; //stores directions of available jumps
 					Coord p1temp = p1pieces[index].get_coord();
 					if (can_jump(p1temp, "TL", index)){
 						cnt++;
-						dir.push_back("TL");
 					}
 					if (can_jump(p1temp, "TR", index)){
 						cnt++;
-						dir.push_back("TR");
 					}
 					if (p1pieces[index].checkKing()){
 						if (can_jump(p1temp, "BL", index)){
 							cnt++;
-							dir.push_back("BL");
 						}
 						if (can_jump(p1temp, "BR", index)){
 							cnt++;
-							dir.push_back("BR");
 						}
 					}
 					if (cnt>=1){
@@ -383,26 +372,20 @@ using namespace std;
 					bool crowned = false;
 					if (p2pieces[index].move(jump*-1,2)==2){
 						p2pieces[index].makeKing();
-						cout<<"CROWNED"<<endl;
+						if (!check_win()){
+							cout<<"CROWNED"<<endl;
+						}
 						crowned = true;
 					}
 
                                         if (jump == -1) { //tl
                                                 oindex = check_coord(make_pair(d.first-1,d.second-1),0);
-						d.first-=2;
-						d.second-=2;
                                         } else if (jump == -2) { //tr
                                                 oindex = check_coord(make_pair(d.first+1,d.second-1),0);
-						d.first+=2;
-						d.second-=2;
                                         } else if (jump == -3) { //bl
                                                 oindex = check_coord(make_pair(d.first-1,d.second+1),0);
-						d.first-=2;
-						d.second+=2;
                                         } else if (jump == -4) { //br
                                                 oindex = check_coord(make_pair(d.first+1,d.second+1),0);
-						d.first+=2;
-						d.second+=2;
                                         }
 					if (oindex > -1) {
 						p1pieces[oindex].jumped();
@@ -412,24 +395,19 @@ using namespace std;
 					}
 					//check for additional jumps
 					int cnt = 0;
-					vector<string> dir;
 					Coord p2temp = p2pieces[index].get_coord();
 					if (can_jump(p2temp, "BL", index)){
 						cnt++;
-						dir.push_back("BL");
 					}
 					if (can_jump(p2temp, "BR", index)){
 						cnt++;
-						dir.push_back("BR");
 					}
 					if (p2pieces[index].checkKing()){
 						if (can_jump(p2temp, "TL", index)){
 							cnt++;
-							dir.push_back("TL");
 						}
 						if (can_jump(p2temp, "TR", index)){
 							cnt++;
-							dir.push_back("TR");
 						}
 					}
 					if (cnt>=1){
