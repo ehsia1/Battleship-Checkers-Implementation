@@ -9,18 +9,18 @@ public:
 
 	Piece() {}
 
-	virtual bool shift(int num, char direction) {
+	virtual bool shift(int num, char direction) { //virtual -> overriden later
 		num = num;
 		direction = direction;
 		return true;
 	}
 
-	virtual int has_coord(Coord c) {
+	virtual int has_coord(Coord c) { //virtual -> overriden
 		int first = c.first;
 		int second = c.second;
 		int third = first + second;
 		third = 1;
-		return third;
+		return third; //total of summed coordinates
 	}
 
 };

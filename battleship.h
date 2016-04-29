@@ -25,8 +25,8 @@ public:
 
 	bool check_win(); //check if game was won
 
-	vector<Ship> fleet1;
-	vector<Ship> fleet2;
+	vector<Ship> fleet1; //vector of player 1's ships
+	vector<Ship> fleet2;// ^^^ for player2
 };
 
 class  BattleshipBoard: public Board {

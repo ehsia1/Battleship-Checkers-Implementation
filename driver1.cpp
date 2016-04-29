@@ -6,7 +6,7 @@
 
 using namespace std;
 
-ostream& operator<<(ostream& os, vector<Ship> fleet) {
+/*ostream& operator<<(ostream& os, vector<Ship> fleet) {
 	for (vector<Ship>::iterator it = fleet.begin(); it!=fleet.end(); it++){
 		cout << it->get_name() << endl;
 		for (map<Coord, int>::iterator it1 = it->location.begin(); it1 != it->location.end(); it1++){
@@ -14,52 +14,52 @@ ostream& operator<<(ostream& os, vector<Ship> fleet) {
                 }
 	}
 	return os;
-}
+}*/
 
-void placement(BattleshipGame& bsgame) {
+void placement(BattleshipGame& bsgame) { //place ships on board
 	string dif_ships[] = {"AIRCRAFT CARRIER", "BATTLESHIP", "CRUISER", "SUBMARINE", "DESTROYER"};
-	int lengths[] = {5, 4, 3, 3, 2};
+	int lengths[] = {5, 4, 3, 3, 2}; //lengths of ships
 
 	Coord bs = make_pair(1, 1);
 	string userInput;
-	Ship temp2(5, bs, 'V');
+	Ship temp2(5, bs, 'V'); //temp needed (you'll see below)
 	bool share = true;
 	int same_pos = 0;
 	int pos = 0;
-	for (int i=0; i<5;i++) {
+	for (int i=0; i<5;i++) { //up until number of ships
 		bool okay = true;
 		while (okay) {
-			cout << "PLAYER 1 PLACE " << dif_ships[i] << ":";
+			cout << "PLAYER 1 PLACE " << dif_ships[i] << ":"; //place specific ship
 			cin >> userInput;
 			cout << endl;
-			if (userInput.at(0) == 'q' || userInput.at(0) == 'Q'){
+			if (userInput.at(0) == 'q' || userInput.at(0) == 'Q'){ //quit program
 				exit(1);
 			}
 			share = true;
-			int first = userInput.at(0) - '0';
-			int second = userInput.at(1) - '0';
+			int first = userInput.at(0) - '0'; //first coord spot
+			int second = userInput.at(1) - '0'; //second coord spot
 			char direction = toupper(userInput.at(2));
 			Coord tempCoord = make_pair(first, second);
-			Ship temp(lengths[i], tempCoord, direction);
-			if (temp.location.empty()==false){
-				temp2 = temp;
+			Ship temp(lengths[i], tempCoord, direction); //temp ship that we have to check the validity of
+			if (temp.location.empty()==false){ //if false then no need to check the existing map cuz nothing in it
+				temp2 = temp; //this is why temp2 is needed
 				if (bsgame.fleet1.empty() == false) {
-					for (vector<Ship>::iterator it = bsgame.fleet1.begin() ; it != bsgame.fleet1.end(); it++) {
+					for (vector<Ship>::iterator it = bsgame.fleet1.begin() ; it != bsgame.fleet1.end(); it++) { //iterate through fleet of ships
 						int index = lengths[i];
 						tempCoord.first = first;
 						tempCoord.second = second;
 						for (int j=0; j<index; j++){
-							if (it->has_coord(tempCoord) > -1) {
+							if (it->has_coord(tempCoord) > -1) { //if coord is present then dont add
 								share = false;
 								same_pos++;
 							}
 							if (direction == 'V'){
-								tempCoord.second++;
+								tempCoord.second++; //increment to check all the spots on vertical axis
 							}else if (direction == 'H'){
-								tempCoord.first++;
+								tempCoord.first++;  //increment to check all the spots on vertical axis
 							}
 						}
-						if (same_pos >= 1 || (same_pos == 1 && i != pos)) {
+						if (same_pos >= 1 || (same_pos == 1 && i != pos)) { //check if spot already taken
 							cout << "Already a ship there" << endl;
 						}
 						same_pos = 0;
@@ -67,7 +67,7 @@ void placement(BattleshipGame& bsgame) {
 					}
 					pos = 0;
 					if (share){
-						okay = false;
+						okay = false; //jump out of loop
 					}
 				}
 				else{
@@ -75,16 +75,16 @@ void placement(BattleshipGame& bsgame) {
 				}
 			}
 			else {
-				temp2 = temp;
+				temp2 = temp; //make the temp2 = temp so we can add
 			}
 		}
 		if(share){
-			temp2.set_name(dif_ships[i]);
-			bsgame.fleet1.push_back(temp2);
+			temp2.set_name(dif_ships[i]); //temp2 has correct info so set its name to the ship
+			bsgame.fleet1.push_back(temp2); //push temp2 into the fleet
 		}
 	}
 
-	for (int i=0; i<5;i++) {
+	for (int i=0; i<5;i++) { //repeat this shit for player 2
                 bool okay = true;
                 while (okay) {
                         cout << "PLAYER 2 PLACE " << dif_ships[i] << ":";
@@ -142,11 +142,11 @@ void placement(BattleshipGame& bsgame) {
         }
 }
 
-void make_ckgame(CheckersGame & ckgame) {
+void make_ckgame(CheckersGame & ckgame) { //sets the board for checkers 
 	Coord c = make_pair(1,0);
 	for (int i = 0; i < 12; i++) {
 		if (i == 4) {
-			c = make_pair(0,1);
+			c = make_pair(0,1); //follows the rules for setting board for player 2 pieces
 		} else if (i == 8) {
 			c = make_pair(1,2);
 		}
@@ -158,7 +158,7 @@ void make_ckgame(CheckersGame & ckgame) {
 	Coord d = make_pair(0,5);
 	for (int i = 0; i < 12; i++) {
 		if (i == 4) {
-			d = make_pair(1,6);
+			d = make_pair(1,6); //follows the rules for setting board for player 1 pieces
 		} else if (i == 8) {
 			d = make_pair(0,7);
 		}
@@ -190,15 +190,15 @@ int main() {
 			placement(bsgame);
 			//print(bsgame.fleet1);
 			//print(bsgame.fleet2);
-			cout << "PLAYER 1 SHIPS" << endl;
+/*			cout << "PLAYER 1 SHIPS" << endl;
 			cout << bsgame.fleet1;
 			cout<< "PLAYER 2 SHIPS" << endl;
-			cout << bsgame.fleet2;
+			cout << bsgame.fleet2;*/
 			if (bsgame.fleet1.empty() == true) {
-				cout << "word" << endl;
+				//cout << "word" << endl;
 			}
 			if (bsgame.fleet2.empty() == true) {
-				cout << "yo" << endl;
+				//cout << "yo" << endl;
 			}
 			string input;
 			while (count1==0) {
@@ -215,10 +215,10 @@ int main() {
 					if (bsgame.attack_square(d) == RESULT_PLAYER1_WINS) {
 						count1++;
 					}
-					cout << "PLAYER 1 SHIPS" << endl;
+					/*cout << "PLAYER 1 SHIPS" << endl;
 		                        cout << bsgame.fleet1;
                 		        cout<< "PLAYER 2 SHIPS" << endl;
-                        		cout << bsgame.fleet2;
+                        		cout << bsgame.fleet2;*/
 
 				} else {
 					cout << "PLAYER 2:";
@@ -233,10 +233,10 @@ int main() {
 					if (bsgame.attack_square(d) == RESULT_PLAYER2_WINS) {
                                                 count1++;
                                         }
-					cout << "PLAYER 1 SHIPS" << endl;
+					/*cout << "PLAYER 1 SHIPS" << endl;
 		                        cout << bsgame.fleet1;
                 		        cout<< "PLAYER 2 SHIPS" << endl;
-                        		cout << bsgame.fleet2;
+                        		cout << bsgame.fleet2;*/
 				}
 			}
 			break;
@@ -246,10 +246,10 @@ int main() {
 			Mobile mobilegame;
                         placement(mobilegame);
 			//print(mobilegame.fleet1);
-			cout << "PLAYER 1 SHIPS" << endl;
+			/*cout << "PLAYER 1 SHIPS" << endl;
                         cout << mobilegame.fleet1;
 			cout << "PLAYER 2 SHIPS" << endl;
-			cout << mobilegame.fleet2;
+			cout << mobilegame.fleet2;*/
 			string input;
 			while (count1==0) {
 				if (mobilegame.turn == false) {
@@ -267,10 +267,10 @@ int main() {
                                                 	count1++;
                                         	}
 						//print(mobilegame.fleet1);
-						cout << "PLAYER 1 SHIPS" << endl;
+						/*cout << "PLAYER 1 SHIPS" << endl;
                        				cout << mobilegame.fleet1;
                         			cout << "PLAYER 2 SHIPS" << endl;
-                        			cout << mobilegame.fleet2;
+                        			cout << mobilegame.fleet2;*/
 					} else if (inputLength == 4) {
 						int first = input.at(0) - '0';
 						int second = input.at(1) - '0';
@@ -279,10 +279,10 @@ int main() {
 						Coord c = make_pair(first, second);
 						mobilegame.move(c, fourth, third);
 						//print(mobilegame.fleet1);
-						cout << "PLAYER 1 SHIPS" << endl;
+						/*cout << "PLAYER 1 SHIPS" << endl;
                         			cout << mobilegame.fleet1;
                         			cout << "PLAYER 2 SHIPS" << endl;
-                        			cout << mobilegame.fleet2;
+                        			cout << mobilegame.fleet2;*/
 //						mobilegame.toggle();
 					}
 				} else {
@@ -299,10 +299,10 @@ int main() {
                                                 if (mobilegame.attack_square(d) == RESULT_PLAYER2_WINS) {
                                                         count1++;
                                                 }
-						cout << "PLAYER 1 SHIPS" << endl;
+						/*cout << "PLAYER 1 SHIPS" << endl;
                         			cout << mobilegame.fleet1;
                         			cout << "PLAYER 2 SHIPS" << endl;
-                        			cout << mobilegame.fleet2;
+                        			cout << mobilegame.fleet2;*/
                                         } else if (inputLength == 4) {
                                                 int first = input.at(0) - '0';
                                                 int second = input.at(1) - '0';
@@ -310,10 +310,10 @@ int main() {
                                                 int fourth = input.at(3) - '0';
                                                 Coord c = make_pair(first, second);
                                                 mobilegame.move(c, fourth, third);
-						cout << "PLAYER 1 SHIPS" << endl;
+						/*cout << "PLAYER 1 SHIPS" << endl;
                         			cout << mobilegame.fleet1;
                         			cout << "PLAYER 2 SHIPS" << endl;
-                        			cout << mobilegame.fleet2;
+                        			cout << mobilegame.fleet2;*/
 //						mobilegame.toggle();
                                         }
 				}
