@@ -28,18 +28,18 @@ public:
 	GameResult attack_square(Coord d, string direction);
 
 	//check win
-	bool check_win();
+	bool check_win(); //all pieces removed for the player????
 
 	void printp();
 
-	vector<CPiece> p1pieces;
-	vector<CPiece> p2pieces;
+	vector<CPiece> p1pieces; //vector of all player 1's pieces
+	vector<CPiece> p2pieces;// ^^ for player 2
 
 };
 
 class CheckersBoard: public Board {
 public:
-        CheckersBoard();
+        CheckersBoard(); //constructor
 
 private:
         char ckarray[8][8];
