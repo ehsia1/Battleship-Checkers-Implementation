@@ -142,7 +142,7 @@ void placement(BattleshipGame& bsgame) { //place ships on board
         }
 }
 
-void make_ckgame(CheckersGame & ckgame) { //sets the board for checkers 
+/*void make_ckgame(CheckersGame & ckgame) { //sets the board for checkers 
 	Coord c = make_pair(1,0);
 	for (int i = 0; i < 12; i++) {
 		if (i == 4) {
@@ -166,7 +166,7 @@ void make_ckgame(CheckersGame & ckgame) { //sets the board for checkers
 		ckgame.p1pieces.push_back(temp);
 		d = make_pair(d.first + 2, d.second);
 	}
-}
+}*/
 
 int main() {
 
@@ -323,7 +323,7 @@ int main() {
 		case '3':
 		{
 			CheckersGame ckgame;
-			make_ckgame(ckgame);
+//			make_ckgame(ckgame);
 			string input;
 			int count1 = 0;
 			while (count1 == 0) {
