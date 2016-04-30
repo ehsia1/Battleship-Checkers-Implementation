@@ -338,7 +338,7 @@ using namespace std;
 					}
 					if (oindex > -1) {
 						p2pieces[oindex].jumped(); //update coordinate of jumped piece
-						if (!crowned){ //only print JUMPED if piece was not just crowned
+						if (!crowned || wasking == 1){ //only print JUMPED if piece was not just crowned
 							cout<<"JUMPED"<<endl;
 						}
 					}
@@ -362,14 +362,15 @@ using namespace std;
 					}
 					string input;
 					if (cnt>=1 && (!crowned || wasking==1)){
-						cout << "PLAYER 1:";
-						cin >> input;
-						Coord a = make_pair(input.at(0) - '0', input.at(1) - '0');
-						char third = toupper(input.at(2));
-						char fourth = toupper(input.at(3));
-						string dir = {third, fourth};
-						if (a != p1temp) {
-							return RESULT_INVALID;
+						Coord a;
+						string dir;
+						while (a != p1temp) {
+							cout << "PLAYER 1:";
+							cin >> input;
+							a = make_pair(input.at(0) - '0', input.at(1) - '0');
+							char third = toupper(input.at(2));
+							char fourth = toupper(input.at(3));
+							dir = {third, fourth};
 						}
 						attack_square(p1temp, dir);
 						return RESULT_KEEP_PLAYING; //if more jumps available, main will repromt user because turn was not changed by toggle()
@@ -428,7 +429,7 @@ using namespace std;
                                         }
 					if (oindex > -1) {
 						p1pieces[oindex].jumped();
-						if (!crowned){
+						if (!crowned || wasking == 1){
 							cout<<"JUMPED"<<endl;
 						}
 					}
@@ -451,15 +452,16 @@ using namespace std;
 					}
 					string input;
 					if (cnt>=1 && (!crowned || wasking==1)){
-						cout << "PLAYER 2:";
-                                                cin >> input;
-                                                Coord a = make_pair(input.at(0) - '0', input.at(1) - '0');
-                                                char third = toupper(input.at(2));
-                                                char fourth = toupper(input.at(3));
-                                                string dir = {third, fourth};
-                                                if (a != p2temp) {
-                                                        return RESULT_INVALID;
-                                                }
+						Coord a;
+						string dir;
+						while (a != p2temp) {
+							cout << "PLAYER 2:";
+        	                                        cin >> input;
+                	                                a = make_pair(input.at(0) - '0', input.at(1) - '0');
+                        	                        char third = toupper(input.at(2));
+                                	                char fourth = toupper(input.at(3));
+                                        	        dir = {third, fourth};
+						}
                                                 attack_square(p2temp, dir);
 						return RESULT_KEEP_PLAYING;
 					}
