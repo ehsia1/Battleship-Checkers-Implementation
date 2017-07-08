@@ -40,16 +40,16 @@ using namespace std;
 	}
 
 	int CPiece::move(int dir, int num){ //move this piece
-		if (dir == 1) { // tl
+		if (dir == 1) { // top left
 			loc.first.first-=num;
 			loc.first.second-=num;
-		} else  if (dir == 2) { // tr
+		} else  if (dir == 2) { // top right
 			loc.first.first+=num;
 			loc.first.second-=num;
-		} else if (dir == 3) { // bl
+		} else if (dir == 3) { // bottom left
 			loc.first.first-=num;
 			loc.first.second+=num;
-		} else if (dir == 4) { // br
+		} else if (dir == 4) { // bottom right
 			loc.first.first+=num;
 			loc.first.second+=num;
 		}

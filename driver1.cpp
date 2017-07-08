@@ -3,18 +3,9 @@
 #include "mobile.h"
 #include "checkers.h"
 
-
+//runs the games
 using namespace std;
 
-/*ostream& operator<<(ostream& os, vector<Ship> fleet) {
-	for (vector<Ship>::iterator it = fleet.begin(); it!=fleet.end(); it++){
-		cout << it->get_name() << endl;
-		for (map<Coord, int>::iterator it1 = it->location.begin(); it1 != it->location.end(); it1++){
-                        os<<"("<< it1->first.first <<", "<< it1->first.second <<")"<< " hits: " << it1->second << endl;
-                }
-	}
-	return os;
-}*/
 
 void placement(BattleshipGame& bsgame) { //place ships on board
 	string dif_ships[] = {"AIRCRAFT CARRIER", "BATTLESHIP", "CRUISER", "SUBMARINE", "DESTROYER"};
@@ -142,7 +133,7 @@ void placement(BattleshipGame& bsgame) { //place ships on board
         }
 }
 
-/*void make_ckgame(CheckersGame & ckgame) { //sets the board for checkers 
+/*void make_ckgame(CheckersGame & ckgame) { //sets the board for checkers
 	Coord c = make_pair(1,0);
 	for (int i = 0; i < 12; i++) {
 		if (i == 4) {
