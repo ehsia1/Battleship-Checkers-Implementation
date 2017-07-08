@@ -2,7 +2,7 @@
 /*Rohan Tilva
 Willie Franceschi
 Evan Hsia*/
-
+//tester file for checkers
 #include <iostream>
 #include <cassert>
 #include <vector>
