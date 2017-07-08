@@ -60,27 +60,27 @@ using namespace std;
 				return false;
 			}
 			for (int i=1; i<=num; i++){
-                                if (dir == 'D'){
-                                        if (check_coord(make_pair(fleet2[str].location.rbegin()->first.first, fleet2[str].location.rbegin()->first.second+i),1) != -1){
-                                                return false;
-                                        }
-                                }
-                                else if (dir == 'U'){
-                                        if (check_coord(make_pair(fleet2[str].location.begin()->first.first, fleet2[str].location.begin()->first.second-i),1) != -1){
-                                                return false;
-                                        }
-                                }
-                                else if (dir == 'R'){
-                                        if (check_coord(make_pair(fleet2[str].location.rbegin()->first.first+i, fleet2[str].location.rbegin()->first.second),1) != -1){
-                                                return false;
-                                        }
-                                }
-                                else if (dir == 'L'){
-                                        if (check_coord(make_pair(fleet2[str].location.begin()->first.first-i, fleet2[str].location.begin()->first.second),1) != -1){
-                                                return false;
-                                        }
-                                }
-                        }
+        if (dir == 'D'){
+          if (check_coord(make_pair(fleet2[str].location.rbegin()->first.first, fleet2[str].location.rbegin()->first.second+i),1) != -1){
+            return false;
+          }
+	      }
+        else if (dir == 'U'){
+          if (check_coord(make_pair(fleet2[str].location.begin()->first.first, fleet2[str].location.begin()->first.second-i),1) != -1){
+            return false;
+          }
+        }
+        else if (dir == 'R'){
+        	if (check_coord(make_pair(fleet2[str].location.rbegin()->first.first+i, fleet2[str].location.rbegin()->first.second),1) != -1){
+            return false;
+          }
+        }
+        else if (dir == 'L'){
+          if (check_coord(make_pair(fleet2[str].location.begin()->first.first-i, fleet2[str].location.begin()->first.second),1) != -1){
+            return false;
+          }
+        }
+      }
 
 			if(fleet2[str].shift(num, dir)){
 				toggle();
@@ -90,5 +90,3 @@ using namespace std;
 		}
 		return false;
 	}
-
-
