@@ -7,7 +7,7 @@ using namespace std;
 
 	Ship::Ship(int num, Coord c, char direction) { //constructor
 
-		direction = toupper(direction); 
+		direction = toupper(direction); //generalize the cases
 		length = num;
 		if ((c.first > 9) || (c.first<0) || (c.second > 9) || (c.second<0)) { //if off the board say off the board
 			cout << "Off the board!" << endl;
@@ -170,7 +170,7 @@ using namespace std;
                         temp.first = -1; //make the coordinates -1 so its off the board;
 			temp.second = -1;
                         location[temp] = it->second;
-                        location.erase(it->first); //erase previous spots 
+                        location.erase(it->first); //erase previous spots
 		}
 	}
 
@@ -187,4 +187,3 @@ using namespace std;
 			location[it->first] = it->second;
 		}
 	}
-

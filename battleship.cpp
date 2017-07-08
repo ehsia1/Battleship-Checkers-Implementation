@@ -9,9 +9,8 @@
 #include "ships.h"
 #include "battleship.h"
 using namespace std;
-//typedef array<Coord, int> ship;
 
-	BattleshipGame::BattleshipGame(): Game(), fleet1(), fleet2() {} //constructor which initializes some sh*t 
+	BattleshipGame::BattleshipGame(): Game(), fleet1(), fleet2() {} //constructor which initializes some sh*t
 	int BattleshipGame::check_coord(Coord c, int whoseShips) { //check if coord present in fleet of ships
 		if (whoseShips == 0) { //if player 2's turn
 			int counter = 0;
@@ -49,7 +48,7 @@ using namespace std;
                                 return RESULT_INVALID;
                         }
 			int is_hit = check_coord(d, 1);
-			if (is_hit >= 0) { 
+			if (is_hit >= 0) {
                                 int st = fleet2[is_hit].has_coord(d);
                                 fleet2[is_hit].hit(st);
 				if (fleet2[is_hit].is_sunk()) { //checks if all spots in ship were sunk
@@ -75,7 +74,7 @@ using namespace std;
 			cout << "MISS" << endl;
 			toggle();
 			return RESULT_KEEP_PLAYING;
-		} else { //this is the same shit but for player 2; see the above comments 
+		} else { //this is the same but for player 2; see the above comments
 			if (d.first < 0 || d.first > 9 || d.second < 0 || d.second > 9) {
                                 cout << "INVALID MOVE" << endl;
                                 return RESULT_INVALID;
