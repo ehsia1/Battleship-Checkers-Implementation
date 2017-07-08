@@ -1,0 +1,12 @@
+Evan Hsia, ehsia1, Final Project Contributions
+
+In this project, the three of us worked mostly collaboratively. We initially met up to come up with the basic design, the inheritance from game.h to battleship,
+mobile, and checkers, and from piece.h to ships and checkers_piece. From there, we also made most of battleship, so we all knew the general idea of what to
+do for the rest. I was the first to test battleship to see if it worked, and made a quick syntactic fix. Willie decided to begin the move function for mobile,
+and Rohan made the driver, and I provided assistance for both. I drafted a lot of checkers at first, implementing a lot of functions. Willie and I made
+sure to make it a little cleaner, and we worked off each other to finalize the checkers game, manipulating the attack_square function to actually work.
+We both would take care of different fixes that we encountered through different run throughs. Meanwhile, Rohan worked on all three tester files, coming
+up with enough play throughs of the three games involving a lot of different cases to test all the functions. We did a good job working off each other,
+working together a lot, but dividing tasks when necessary.
+
+In short, we did a good job of dividing the tasks evenly, and no single person carried a heavier load or did not pull his weight.
